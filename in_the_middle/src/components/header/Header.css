@@ -1,0 +1,108 @@
+.header__main {
+    position: sticky;
+    top: 0;
+    display: flex;
+    background-color: white;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 0.1px solid lightgray;
+    padding: 10px 10px;
+    /* padding-top: 10px;
+    padding-bottom: 10px; */
+    width: 100%;
+    z-index: 999;
+   
+}
+.header__main {
+    display: flex;
+}
+
+
+
+.header__main__left > img {
+    object-fit: contain;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.header__main__left {
+    display: flex;
+   
+}
+.header__main__left__inputs {
+    display: flex;
+    align-items: center;
+    border:1px solid lightgray;
+}
+.header__main__left__inputs > input {
+    height: 100%;
+    border: none;
+    border-right: 1px solid lightgray;
+    padding: 0 5px;
+}
+
+.header__main__left__inputs > .ExpandMoreIcon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    border-right: 1px solid lightgray;
+}
+
+.header__main__left__inputs > .locationBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.ExpandMoreIcon {
+    color: #333
+}
+.ExpandMoreIcon > input {
+    border: none;
+    text-align: center;
+}
+
+.locationBox > input {
+    border: none;
+    text-align: center;
+}
+
+.searchBox {
+    background: lightgray;
+    height: 38px;
+    width:38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.searchBox > .MuiSvgIcon-root {
+    color: #333;
+    
+}
+
+.searchBox:hover {
+    opacity: 0.5;
+}
+
+
+
+
+.header__main__right {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.header__main__right > * {
+    margin:0 8px;
+}
+
+.header__main__right__avatar {
+    object-fit: contain;
+    width: 25px !important;
+    height: 25px !important;
+    font-size: 0.7rem;
+}
