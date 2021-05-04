@@ -3,7 +3,7 @@ import './Main.css';
 import Header from '../header/Header';
 import Shop from '../shop/Shop';
 
-function Main({ onClick }) {
+function Main({ onShopClick }) {
   // const onClick = () => {
   //   <Shop />;
   // };
@@ -16,7 +16,7 @@ function Main({ onClick }) {
         </div>
         <div className='main__selectBox'>
           <div className='selectBox'>
-            <button>Shop</button>
+            <button onClick={onShopClick}>Shop</button>
 
             {/* </div>
           <div className='selectBox'> */}
