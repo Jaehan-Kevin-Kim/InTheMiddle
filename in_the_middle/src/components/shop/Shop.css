@@ -1,4 +1,30 @@
-.shop__main {
+.container {
     background: rgb(170, 185, 181);
-    height: 100%;
+    margin: 0 auto;
 }
+
+.shop__main {
+    width: 80%;
+    height: 80%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 25px;
+    position: relative;
+    margin: 3em auto;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.item {
+    width: 300px;
+    margin: 0 auto;
+}
+
+.item > img {
+    object-fit: contain;
+    width: 100%;
+}
+/* .item > p {
+    text-align: start;
+} */

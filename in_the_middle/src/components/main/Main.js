@@ -1,7 +1,8 @@
-import React from 'react';
-import './Main.css';
-import Header from '../header/Header';
-import Shop from '../shop/Shop';
+import React from "react";
+import "./Main.css";
+import Header from "../header/Header";
+import Shop from "../shop/Shop";
+import { BrowserRouter, Route } from "react-router-dom";
 
 function Main({ onShopClick }) {
   // const onClick = () => {
@@ -10,6 +11,11 @@ function Main({ onShopClick }) {
   return (
     <>
       <Header />
+      <BrowserRouter>
+        <Route path='/shop' component={Shop}>
+          Home
+        </Route>
+      </BrowserRouter>
       <div className='main__main'>
         <div className='main__bennerImg'>
           <img src='' alt='' />
