@@ -2,27 +2,33 @@ import React from "react";
 import "./Main.css";
 import Header from "../header/Header";
 import Shop from "../shop/Shop";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Link, Route } from "react-router-dom";
 
-function Main({ onShopClick }) {
+// function Main({ onShopClick }) {
+function Main() {
   // const onClick = () => {
   //   <Shop />;
+  // };
+  // const toShop = () => {
+  //   <BrowserRouter>
+  //     <Route path='/shop' component={Shop}>
+  //       <Shop />
+  //     </Route>
+  //   </BrowserRouter>;
   // };
   return (
     <>
       <Header />
-      <BrowserRouter>
-        <Route path='/shop' component={Shop}>
-          Home
-        </Route>
-      </BrowserRouter>
       <div className='main__main'>
         <div className='main__bennerImg'>
           <img src='' alt='' />
         </div>
         <div className='main__selectBox'>
           <div className='selectBox'>
-            <button onClick={onShopClick}>Shop</button>
+            {/* <button onClick={onShopClick}>Shop</button> */}
+            <Link to='/shop'>
+              <button>Shop</button>
+            </Link>
 
             {/* </div>
           <div className='selectBox'> */}

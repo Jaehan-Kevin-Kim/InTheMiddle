@@ -2,6 +2,19 @@
     background: rgb(170, 185, 181);
     margin: 0 auto;
 }
+.shop_button {
+    width: 100%;
+    position: relative;
+  
+}
+
+.shop_button .btn_post {
+    cursor: pointer;
+    position: absolute;
+    width: 100px;
+    top: 15px;
+    right: 15px;
+}
 
 .shop__main {
     width: 80%;

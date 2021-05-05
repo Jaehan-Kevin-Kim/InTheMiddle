@@ -1,0 +1,19 @@
+
+
+.upload_form {
+  display: flex;
+  flex-direction: column;
+  /* width: 80%; */
+  /* align-items: center; */
+}
+
+.upload_input { 
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.upload_input > h3 {
+  margin-right: 10px;
+}
+
