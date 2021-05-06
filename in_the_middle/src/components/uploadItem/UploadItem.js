@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./UploadItem.css";
 import Header from "../header/Header";
-import { Link } from "react-router-dom";
+import { Link, Redirect, Route } from "react-router-dom";
 import { db } from "../../firebase";
 import firebase from "firebase";
 
@@ -11,6 +11,13 @@ function UploadItem() {
   const [itemRegion, setItemRegion] = useState("");
   const [itemImg, setItemImg] = useState("");
   const [itemDesc, setItemDesc] = useState("");
+  const [redirect, setRedirect] = useState(false);
+
+  console.log();
+  // useEffect(() => {
+  //   console.log("useEffect");
+  //   return <Redirect to='/shop' />;
+  // }, []);
 
   const handleChange = (e) => {
     if (e.target.files[0]) {
@@ -19,7 +26,7 @@ function UploadItem() {
   };
 
   const onSubmit = (e) => {
-    // console.log(itemImg, itemName, itemCost, itemRegion, itemDesc);
+    console.log(itemImg, itemName, itemCost, itemRegion, itemDesc);
     e.preventDefault();
     db.collection("items").add({
       itemImg:
@@ -35,7 +42,18 @@ function UploadItem() {
     setItemRegion("");
     setItemCost("");
     setItemImg("");
+    setRedirect(true);
+    // <Redirect from='/uploadItem' to='/shop' />;
+    // <Route path='/uploadItem'>
+    //   {redirect ? <Redirect to='/shop' /> : <Redirect to='/uploadItem' />}
+    //   {/* return <Redirect to='/shop' />; */}
+    // </Route>;
   };
+
+  <Route path='/uploadItem'>
+    {onSubmit ? <Redirect to='/shop' /> : <Redirect to='/uploadItem' />}
+    {/* return <Redirect to='/shop' />; */}
+  </Route>;
 
   return (
     <>
@@ -89,11 +107,12 @@ function UploadItem() {
             />
           </div>
         </div>
-        <Link to='/shop'>
-          <button className='btn_post' onClick={onSubmit}>
-            Submit
-          </button>
-        </Link>
+        {/* <Link to='/shop'> */}
+        <button className='btn_post' onClick={onSubmit}>
+          {/* <Redirect to='/shop' />; */}
+          Submit
+        </button>
+        {/* </Link> */}
       </div>
     </>
   );

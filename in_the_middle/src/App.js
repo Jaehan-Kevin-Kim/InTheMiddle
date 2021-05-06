@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // import Shop from './components/shop/Shop';
 import Main from "./components/main/Main";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
@@ -6,16 +6,41 @@ import Login from "./components/login/Login";
 import Shop from "./components/shop/Shop";
 import ShopDetail from "./components/shopDetail/ShopDetail";
 import UploadItem from "./components/uploadItem/UploadItem";
+import { auth } from "./firebase";
 
-function App() {
+const App = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+    });
+    console.log(isLoggedIn);
+  });
   return (
     <>
       {/* <Shop /> */}
-
       <Router>
         <Route exact path='/' component={Main}>
           <Main />
         </Route>
+        {/* {isLoggedIn ? (
+          <Route exact path='/' component={Main}>
+            <Main />
+          </Route>
+        ) : (
+          <Route path='/login' component={Login}>
+            <Login />
+          </Route>
+        )} */}
+        <Route path='/login' component={Login}>
+          <Login />
+        </Route>
+
         {/*<Route exact path='/main' component={Main}>
           <Main />
         </Route>*/}
@@ -40,6 +65,6 @@ function App() {
     </Shop> */}
     </>
   );
-}
+};
 
 export default App;
