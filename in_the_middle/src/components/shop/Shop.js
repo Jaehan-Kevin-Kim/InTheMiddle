@@ -12,6 +12,11 @@ function Shop() {
   const [itemCost, setItemCost] = useState("");
   const [itemViews, setItemViews] = useState(0);
   const [items, setItems] = useState([]);
+  const [toShopDetail, setToShopDetail] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const selectItem = (items) => {
+    setSelectedItem(items);
+  };
 
   useEffect(() => {
     // setItemImg(
@@ -30,6 +35,11 @@ function Shop() {
     );
   }, []);
 
+  // const onClickItem = (e) => {
+  //   console.log(toShopDetail);
+  //   e.preventDefault();
+  //   setToShopDetail(true);
+  // };
   return (
     <>
       <div className='container'>
@@ -41,28 +51,52 @@ function Shop() {
         </div>
         <div className='shop__main'>
           <div className='item'>
+            {/* {selectedItem && (
+              <div>
+                <ShopDetail
+                  img={itemImg}
+                  name={itemName}
+                  cost={itemCost}
+                  location='calgary'
+                  description='Nice'
+                  views={itemViews}
+                />
+              </div>
+            )} */}
+
             {items.map(({ id, data: { itemName, itemImg, itemViews, itemCost } }) => (
-              <Link
-                className='shop__link'
-                to='/shopDetail'
+              <ShopItem
                 key={id}
                 img={itemImg}
                 name={itemName}
                 cost={itemCost}
-                location='calgary'
-                description='Nice'
-                views={itemViews}>
-                <ShopItem
-                  key={id}
-                  img={itemImg}
-                  name={itemName}
-                  cost={itemCost}
-                  views={itemViews}
-                />
-                {/* <ShopDetail
-                  
-                /> */}
-              </Link>
+                views={itemViews}
+                // onClickItem={selectItem}
+              />
+              // <Link className='shop__link' to='/shopDetail'>
+              //   <div onClick={onClickItem}>
+              //     {toShopDetail ? (
+              //       <ShopDetail
+              //         key={id}
+              //         img={itemImg}
+              //         name={itemName}
+              //         cost={itemCost}
+              //         views={itemViews}
+              //         location='calgary'
+              //         description='Nice'
+              //       />
+              //     ) : (
+              //       <ShopItem
+              //         key={id}
+              //         img={itemImg}
+              //         name={itemName}
+              //         cost={itemCost}
+              //         views={itemViews}
+              //         // onClickItem={selectItem}
+              //       />
+              //     )}
+              //   </div>
+              // </Link>
             ))}
           </div>
         </div>
