@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./UploadItem.css";
 import Header from "../header/Header";
 import { Link } from "react-router-dom";
+import { db } from "../../firebase";
+import firebase from "firebase";
 
 function UploadItem() {
   const [itemName, setItemName] = useState("");
@@ -16,9 +18,25 @@ function UploadItem() {
     }
   };
 
-  const onSubmit = () => {
-    console.log(itemImg, itemName, itemCost, itemRegion, itemDesc);
+  const onSubmit = (e) => {
+    // console.log(itemImg, itemName, itemCost, itemRegion, itemDesc);
+    e.preventDefault();
+    db.collection("items").add({
+      itemImg:
+        "https://9to5mac.com/wp-content/uploads/sites/6/2019/11/how-to-quickly-select-move-delete-notes-iphone-ipad-two-finger-tap.jpeg?quality=82&strip=all",
+      itemName,
+      itemCost,
+      itemRegion,
+      itemDesc,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+    setItemName("");
+    setItemDesc("");
+    setItemRegion("");
+    setItemCost("");
+    setItemImg("");
   };
+
   return (
     <>
       <div className='container'>
