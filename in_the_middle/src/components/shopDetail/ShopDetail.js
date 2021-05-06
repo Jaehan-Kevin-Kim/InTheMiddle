@@ -3,23 +3,25 @@ import Header from "../header/Header";
 import "./ShopDetail.css";
 import { Avatar } from "@material-ui/core";
 
-function ShopDetail() {
+function ShopDetail({ img, name, cost, location, description }) {
+  // const [itemImg, setItemImg] = useState("");
+  // const [itemCost, setItemCost] = useState("");
+  // const [location, setLocation] = useState("");
+  // const [itemName, setItemName] = useState("");
+  // const [description, setDescription] = useState("");
+  console.log(img, name, cost, location);
+
   return (
     <>
       <div className='container'>
         <Header />
         <div className='detail_item_main'>
           <div className='detail_item'>
-            {" "}
-            {/* item img */}
-            <img
-              src='https://specials-images.forbesimg.com/imageserve/5d3703e2f1176b00089761a6/960x0.jpg?cropX1=836&cropX2=5396&cropY1=799&cropY2=3364'
-              alt='Car'
-            />
+            <img src={img} alt='' /> {/* item img */}
             <div className='detail_item_info'>
-              <h1>item name</h1>
-              <h3>$50,000</h3> {/* price */}
-              <h5>Downtown, Calgary</h5> {/* location */}
+              <h1>{name}</h1>
+              <h3>${cost}</h3> {/* price */}
+              <h5>{location}</h5> {/* location */}
               <button className='btn btn_like'>Like</button>{" "}
               {/* 좋아요 버튼을 누르면 횟수가 적립되야함 */}
               <div className='detail_item_info_msg'>
@@ -30,7 +32,7 @@ function ShopDetail() {
           </div>
           <div className='detail_item_description'>
             <h5>Description</h5>
-            <p>This is a car</p>
+            <p>{description}</p>
           </div>
           <div className='detail_seller'>
             <div className='detail_seller_info'>

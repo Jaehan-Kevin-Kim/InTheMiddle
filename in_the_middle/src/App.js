@@ -16,6 +16,9 @@ function App() {
         <Route exact path='/' component={Main}>
           <Main />
         </Route>
+        {/*<Route exact path='/main' component={Main}>
+          <Main />
+        </Route>*/}
         {/* <Link to='/shop'>Shop</Link> */}
         <Route path='/shop' component={Shop}>
           <Shop />
