@@ -1,22 +1,25 @@
-import React from 'react';
-import SearchIcon from '@material-ui/icons/Search';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
-import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { Avatar } from '@material-ui/core';
-import './Header.css';
+import React from "react";
+import SearchIcon from "@material-ui/icons/Search";
+import LocationOnIcon from "@material-ui/icons/LocationOn";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import NotificationsNoneIcon from "@material-ui/icons/NotificationsNone";
+import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { Avatar } from "@material-ui/core";
+import "./Header.css";
+import { auth } from "../../firebase";
+import { useHistory } from "react-router";
 
 const Header = () => {
+  const history = useHistory();
+  const logoutEvent = () => {
+    auth.signOut();
+    history.push("/");
+  };
   return (
     <div className='header__main'>
       <div className='header__main__left'>
-        <img
-          className='header__main__logo'
-          src='../../images/logo.png'
-          alt='logo'
-        />
+        <img className='header__main__logo' src='../../images/logo.png' alt='logo' />
         <div className='header__main__left__inputs'>
           <input type='text' placeholder='Search item or location...' />
           <div className='ExpandMoreIcon'>
@@ -30,6 +33,7 @@ const Header = () => {
           <div className='searchBox'>
             <SearchIcon />
           </div>
+          <button onClick={logoutEvent}>SignOut</button>
         </div>
       </div>
 

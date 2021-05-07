@@ -1,0 +1,30 @@
+.manageItem {
+    display: flex;
+    flex-direction: column;
+}
+
+.manageItem__list{
+    display: flex;
+    width: 500px;
+    border: 1px gray solid;
+    top: 1em;
+}
+
+.manageItem__list__item {    
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.manageItem__list__item__left {
+    display: flex;
+    margin-left: 1em;
+}
+.manageItem__list__item__left >img {
+    object-fit: contain;
+    width: 100px;
+}
+
+.manageItem__list__item__info {
+    display: flex;
+    flex-direction: column;
+}

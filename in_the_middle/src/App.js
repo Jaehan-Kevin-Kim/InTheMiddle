@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from "react";
 // import Shop from './components/shop/Shop';
 import Main from "./components/main/Main";
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import Login from "./components/login/Login";
 import Shop from "./components/shop/Shop";
 import ShopDetail from "./components/shopDetail/ShopDetail";
 import UploadItem from "./components/uploadItem/UploadItem";
 import { auth } from "./firebase";
+import ManageItem from "./components/manageItem/ManageItem";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userId, setUserId] = useState("");
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
+      console.log(user.uid);
       if (user) {
         setIsLoggedIn(true);
+        setUserId(user.uid);
       } else {
         setIsLoggedIn(false);
       }
@@ -24,27 +28,19 @@ const App = () => {
   return (
     <>
       {/* <Shop /> */}
-      <Router>
-        <Route exact path='/' component={Main}>
-          <Main />
-        </Route>
-        {/* {isLoggedIn ? (
-          <Route exact path='/' component={Main}>
-            <Main />
-          </Route>
-        ) : (
-          <Route path='/login' component={Login}>
-            <Login />
-          </Route>
-        )} */}
-        <Route path='/login' component={Login}>
-          <Login />
-        </Route>
 
-        {/*<Route exact path='/main' component={Main}>
-          <Main />
-        </Route>*/}
-        {/* <Link to='/shop'>Shop</Link> */}
+      <Router>
+        <Switch>
+          {isLoggedIn ? (
+            <Route exact path='/' component={Main}>
+              <Main />
+            </Route>
+          ) : (
+            <Route exact path='/' component={Login}>
+              <Login />
+            </Route>
+          )}
+        </Switch>
         <Route path='/shop' component={Shop}>
           <Shop />
         </Route>
@@ -52,17 +48,12 @@ const App = () => {
           <ShopDetail />
         </Route>
         <Route path='/uploadItem' component={UploadItem}>
-          <UploadItem />
+          <UploadItem userId={userId} />
+        </Route>
+        <Route path='/manageItem' component={ManageItem}>
+          <ManageItem userId={userId} />
         </Route>
       </Router>
-
-      {/* <Router>
-        <Route path='/' component={Login} />
-        <Route path='/main' component={Main} />
-        <Route path='/Shop' component={Shop} />
-        <Route path='/ShopDetail' component={ShopDetail} />
-      </Router>
-    </Shop> */}
     </>
   );
 };

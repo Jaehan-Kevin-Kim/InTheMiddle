@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Login.css";
 import { db, auth } from "../../firebase";
+import firebase from "firebase";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -33,9 +34,9 @@ const Login = () => {
     } = event;
     let provider;
     if (name === "google") {
-      provider = new auth.GoogleAuthProvider();
+      provider = new firebase.auth.GoogleAuthProvider();
     } else if (name === "github") {
-      provider = new auth.GithubAuthProvider();
+      provider = new firebase.auth.GithubAuthProvider();
     }
     const data = await auth.signInWithPopup(provider);
     console.log(data);

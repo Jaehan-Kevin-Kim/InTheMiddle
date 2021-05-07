@@ -1,36 +1,65 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./UploadItem.css";
 import Header from "../header/Header";
-import { Link, Redirect, Route } from "react-router-dom";
-import { db } from "../../firebase";
+import { useHistory } from "react-router-dom";
+import { db, storage } from "../../firebase";
 import firebase from "firebase";
 
-function UploadItem() {
+const UploadItem = ({ userId }) => {
   const [itemName, setItemName] = useState("");
   const [itemCost, setItemCost] = useState("");
   const [itemRegion, setItemRegion] = useState("");
-  const [itemImg, setItemImg] = useState("");
+  const [itemImg, setItemImg] = useState();
   const [itemDesc, setItemDesc] = useState("");
-  const [redirect, setRedirect] = useState(false);
+  // const [redirect, setRedirect] = useState(false);
+  const history = useHistory();
 
-  console.log();
-  // useEffect(() => {
-  //   console.log("useEffect");
-  //   return <Redirect to='/shop' />;
-  // }, []);
+  const [image, setImage] = useState(null);
+  const [progress, setProgress] = useState(0);
 
   const handleChange = (e) => {
     if (e.target.files[0]) {
-      setItemImg(e.target.files[0]);
+      setImage(e.target.files[0]);
     }
+  };
+
+  const handleUpload = () => {
+    const uploadTask = storage.ref(`images/${image.name}`).put(image);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        //progress fuction ...
+        const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+        setProgress(progress);
+      },
+      (error) => {
+        //error fuction ...
+        console.log(error);
+        alert(error.message);
+      },
+      () => {
+        //complete fuction ...
+        storage
+          .ref("images")
+          .child(image.name)
+          .getDownloadURL()
+          .then((url) => {
+            console.log(url);
+            setItemImg(url);
+            setProgress(0);
+            setImage(null);
+          });
+      }
+    );
   };
 
   const onSubmit = (e) => {
     console.log(itemImg, itemName, itemCost, itemRegion, itemDesc);
     e.preventDefault();
+
     db.collection("items").add({
-      itemImg:
-        "https://9to5mac.com/wp-content/uploads/sites/6/2019/11/how-to-quickly-select-move-delete-notes-iphone-ipad-two-finger-tap.jpeg?quality=82&strip=all",
+      userId,
+      itemImg,
       itemName,
       itemCost,
       itemRegion,
@@ -42,18 +71,8 @@ function UploadItem() {
     setItemRegion("");
     setItemCost("");
     setItemImg("");
-    setRedirect(true);
-    // <Redirect from='/uploadItem' to='/shop' />;
-    // <Route path='/uploadItem'>
-    //   {redirect ? <Redirect to='/shop' /> : <Redirect to='/uploadItem' />}
-    //   {/* return <Redirect to='/shop' />; */}
-    // </Route>;
+    history.push("/shop");
   };
-
-  <Route path='/uploadItem'>
-    {onSubmit ? <Redirect to='/shop' /> : <Redirect to='/uploadItem' />}
-    {/* return <Redirect to='/shop' />; */}
-  </Route>;
 
   return (
     <>
@@ -89,10 +108,14 @@ function UploadItem() {
             />
           </div>
 
-          <div className='upload_image'>
-            <h3>Image Upload</h3>
-            <input type='file' onChange={handleChange} />
-            {/* <button>Upload</button> */}
+          {/* <div className='upload_image'>
+            <ImageUpload onClick={imageUploadFunction} />
+          </div> */}
+          <div className='imageUpload'>
+            <progress className='imageUploadProgress' value={progress} max='100' />
+
+            <input type='File' onChange={handleChange} />
+            <button onClick={handleUpload}>Upload</button>
           </div>
 
           <div className='upload_description'>
@@ -107,15 +130,13 @@ function UploadItem() {
             />
           </div>
         </div>
-        {/* <Link to='/shop'> */}
+
         <button className='btn_post' onClick={onSubmit}>
-          {/* <Redirect to='/shop' />; */}
           Submit
         </button>
-        {/* </Link> */}
       </div>
     </>
   );
-}
+};
 
 export default UploadItem;
