@@ -9,6 +9,7 @@ import { Avatar } from "@material-ui/core";
 import "./Header.css";
 import { auth } from "../../firebase";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const history = useHistory();
@@ -19,7 +20,9 @@ const Header = () => {
   return (
     <div className='header__main'>
       <div className='header__main__left'>
-        <img className='header__main__logo' src='../../images/logo.png' alt='logo' />
+        <Link to='/'>
+          <img className='header__main__logo' src='../../images/logo.png' alt='logo' />
+        </Link>
         <div className='header__main__left__inputs'>
           <input type='text' placeholder='Search item or location...' />
           <div className='ExpandMoreIcon'>
@@ -33,7 +36,9 @@ const Header = () => {
           <div className='searchBox'>
             <SearchIcon />
           </div>
-          <button onClick={logoutEvent}>SignOut</button>
+          <a href='/'>
+            <button onClick={logoutEvent}>SignOut</button>
+          </a>
         </div>
       </div>
 

@@ -23,6 +23,7 @@ const Login = () => {
       unsubscriobe();
     };
   }, [user]);
+  console.log(user);
 
   // useEffect(() => {
   //   db.collection
