@@ -6,7 +6,7 @@ import ShopItem from "./ShopItem";
 import { db } from "../../firebase";
 import ShopDetail from "../shopDetail/ShopDetail";
 
-const Shop = ({ shopDetail, searchBtnClicked }) => {
+const Shop = ({ shopDetail, searchBtnClicked, itemViews }) => {
   const [img, setImg] = useState("");
   const [name, setName] = useState("");
   const [cost, setCost] = useState("");
@@ -21,6 +21,7 @@ const Shop = ({ shopDetail, searchBtnClicked }) => {
     setSelectedItem(items);
   };
 
+  console.log(itemViews);
   useEffect(() => {
     db.collection("items")
       .orderBy("timestamp", "desc")
@@ -56,46 +57,44 @@ const Shop = ({ shopDetail, searchBtnClicked }) => {
           {/* {searchBtnClicked ? <div></div> : } */}
           <Header />
           <div className='shop__main'>
-            <Link to='/uploadItem'>
-              <button className='btn_post'>Post Ad</button>
-            </Link>
-            <Link to='/manageItem'>
-              <button className='btn_post'>Manage Item</button>
-            </Link>
-            <div className='item'>
-              {items.map(
-                ({
-                  id,
-                  data: { itemName, itemImg, itemViews, itemCost, itemRegion, itemDesc },
-                }) => (
-                  <>
-                    <Link to='/shopDetail'>
-                      <div
-                        className='item'
-                        onClick={(e) => {
-                          console.log(toShopDetail);
-                          console.log(itemName);
-                          e.preventDefault();
-                          setToShopDetail(true);
-                          setName(itemName);
-                          setImg(itemImg);
-                          setViews(itemViews);
-                          setCost(itemCost);
-                          setDescription(itemDesc);
-                          setLocation(itemRegion);
-                        }}>
-                        <img src={itemImg} alt='' />
-                        <p>{itemName}</p>
-                        <p>${itemCost}</p>
-                        <p>{itemViews}</p>
-                      </div>
-                    </Link>
-                  </>
-                )
-              )}
+            <div className='shop__main__addAction'>
+              <Link to='/manageItem'>
+                <button className='btn_post'>Manage Item</button>
+              </Link>
+              <Link to='/uploadItem'>
+                <button className='btn_post'>Post Ad</button>
+              </Link>
+            </div>
+            {/* <div className='shop__link'> */}
+            <div className='items'>
+              {items.map(({ id, data: { itemName, itemImg, itemCost, itemRegion, itemDesc } }) => (
+                <>
+                  <div
+                    className='item'
+                    onClick={(e) => {
+                      console.log(toShopDetail);
+                      console.log(itemName);
+                      console.log(views);
+                      e.preventDefault();
+                      setToShopDetail(true);
+                      setName(itemName);
+                      setImg(itemImg);
+                      setViews(itemViews + 1);
+                      setCost(itemCost);
+                      setDescription(itemDesc);
+                      setLocation(itemRegion);
+                    }}>
+                    <img src={itemImg} alt='' />
+                    <p className='itemName'>{itemName}</p>
+                    <p>${itemCost}</p>
+                    {/* <p>{itemViews}</p> */}
+                  </div>
+                </>
+              ))}
             </div>
           </div>
         </div>
+        // </div>
       )}
     </>
   );

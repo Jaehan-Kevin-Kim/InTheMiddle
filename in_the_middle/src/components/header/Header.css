@@ -10,6 +10,7 @@
     /* padding-top: 10px;
     padding-bottom: 10px; */
     width: 100%;
+    /* height: 80px; */
     z-index: 999;
    
 }
@@ -19,7 +20,7 @@
 
 
 
-.header__main__left > img {
+.header__main__left img {
     object-fit: contain;
     height: 40px;
     margin-right: 10px;
@@ -69,8 +70,8 @@
 }
 
 .searchBox {
-    background: lightgray;
-    height: 38px;
+    background: #ffecb4;
+    height: 100%;
     width:38px;
     display: flex;
     align-items: center;
@@ -88,6 +89,9 @@
 }
 
 
+.header__main__right > a {
+    text-decoration: none;
+}
 
 
 .header__main__right {

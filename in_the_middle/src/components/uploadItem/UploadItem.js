@@ -76,10 +76,10 @@ const UploadItem = ({ userId }) => {
 
   return (
     <>
-      <div className='container'>
+      <div className='upload'>
         <Header />
-        <h1>Upload Item</h1>
         <div className='upload_form'>
+          <h1>Upload Item</h1>
           <div className='upload_input'>
             <h3>Item Name</h3>
             <input
@@ -114,8 +114,10 @@ const UploadItem = ({ userId }) => {
           <div className='imageUpload'>
             <progress className='imageUploadProgress' value={progress} max='100' />
 
-            <input type='File' onChange={handleChange} />
-            <button onClick={handleUpload}>Upload</button>
+            <input type='File' className='file_input' onChange={handleChange} />
+            <button className='btn_upload' onClick={handleUpload}>
+              Upload
+            </button>
           </div>
 
           <div className='upload_description'>

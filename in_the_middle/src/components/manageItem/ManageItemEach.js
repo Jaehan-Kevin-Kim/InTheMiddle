@@ -19,7 +19,7 @@ const ManageItemEach = ({ isOwner, manageItemObj }) => {
 
   console.log(timestamp.toDate());
   const date = new Date(timestamp.toDate());
-  const uploadDate = `${date.getFullYear()} - ${date.getMonth()} - ${date.getDate()}`;
+  const uploadDate = `${date.getFullYear()} / ${date.getMonth()} / ${date.getDate()}`;
   //   console.log(uploadDate);
   return (
     <>
@@ -30,12 +30,12 @@ const ManageItemEach = ({ isOwner, manageItemObj }) => {
             <div className='manageItem__list__item__left'>
               <img src={itemImg} alt='item' />
               <div className='manageItem__list__item__info'>
-                <p>{itemName}</p>
+                <p className='itemName'>{itemName}</p>
                 <p>${itemCost}</p>
               </div>
             </div>
             <div className='manageItem__list__item__right'>
-              <p>{uploadDate}</p>
+              <p>Upload Date: {uploadDate}</p>
               <div>
                 <button onClick={deleteFunction}>Delete Post</button>
               </div>

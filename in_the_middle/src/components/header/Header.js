@@ -72,9 +72,6 @@ const Header = () => {
             <div className='searchBox'>
               <SearchIcon onClick={itemSearch} />
             </div>
-            <a href='/'>
-              <button onClick={logoutEvent}>SignOut</button>
-            </a>
           </div>
         </div>
 
@@ -82,7 +79,9 @@ const Header = () => {
           <FavoriteBorderIcon />
           <NotificationsNoneIcon />
           <ChatBubbleOutlineIcon />
-          <Avatar className='header__main__right__avatar'>J</Avatar>
+          <a href='/'>
+            <Avatar className='header__main__right__avatar'>J</Avatar>
+          </a>
         </div>
       </div>
       {/* {searchBtnClicked && (

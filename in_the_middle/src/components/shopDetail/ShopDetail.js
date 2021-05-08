@@ -6,7 +6,7 @@ import { Link, Redirect, withRouter, useHistory } from "react-router-dom";
 import useReactRouter from "use-react-router";
 import Shop from "../shop/Shop";
 
-const ShopDetail = ({ img, name, cost, location, description, shopDetail }) => {
+const ShopDetail = ({ img, name, cost, location, description, shopDetail, views }) => {
   const [toShopDetail, setToShopDetail] = useState(shopDetail);
   // const ShopDetail = (props) => {
   // const [itemImg, setItemImg] = useState("");
@@ -32,7 +32,9 @@ const ShopDetail = ({ img, name, cost, location, description, shopDetail }) => {
       {toShopDetail ? (
         <>
           <Header />
-          <button onClick={handleGoBack}>Go Back</button>
+          <button className='goBack_btn' onClick={handleGoBack}>
+            Go Back
+          </button>
           {/* <Link to='/shop'>Go back </Link> */}
           {/* <Redirect to='/shopDetail'> </Redirect> */}
           <div className='container'>
@@ -73,7 +75,7 @@ const ShopDetail = ({ img, name, cost, location, description, shopDetail }) => {
           </div>
         </>
       ) : (
-        <Shop shopDetail={toShopDetail} />
+        <Shop shopDetail={toShopDetail} itemViews={views} />
       )}
     </>
   );
