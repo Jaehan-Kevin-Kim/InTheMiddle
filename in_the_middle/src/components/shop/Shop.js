@@ -6,7 +6,7 @@ import ShopItem from "./ShopItem";
 import { db } from "../../firebase";
 import ShopDetail from "../shopDetail/ShopDetail";
 
-const Shop = ({ shopDetail }) => {
+const Shop = ({ shopDetail, searchBtnClicked }) => {
   const [img, setImg] = useState("");
   const [name, setName] = useState("");
   const [cost, setCost] = useState("");
@@ -53,6 +53,7 @@ const Shop = ({ shopDetail }) => {
       ) : (
         // </Redirect>
         <div className='container'>
+          {/* {searchBtnClicked ? <div></div> : } */}
           <Header />
           <div className='shop__main'>
             <Link to='/uploadItem'>
