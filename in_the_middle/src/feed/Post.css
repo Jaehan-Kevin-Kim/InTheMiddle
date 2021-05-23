@@ -1,0 +1,54 @@
+.post__container{
+    display: flex;
+    flex-direction: column;
+    margin-top: 1em;
+    background-color:white;
+    padding:10px;
+    border-radius: 10px;
+    width: 80%;
+    margin: 1em auto;
+    border: 1px solid lightgrey;
+}
+
+.post__top{
+    display: flex;
+    align-items: center;
+}
+
+.post__top__info{
+    margin-left: 10px;
+}
+
+.post__top__info__name {
+    font-weight: 700;
+}
+.post__top__info__job{
+    font-size: 12px;
+    color: gray;
+    
+}
+
+.post__line{
+    margin: 1em 0;
+    border-bottom: 1px solid lightgrey;
+}
+
+
+
+.post__bottom{
+    display: flex;
+    justify-content:space-evenly;
+    align-items:center;
+}
+
+.post__bottom > button {
+    background: none;
+    border: none;
+}
+
+.comments {
+    margin-top: 1.5em;
+    border-top: 1px dashed lightgray;
+    /* border-style: ; */
+}
+

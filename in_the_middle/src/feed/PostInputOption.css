@@ -1,0 +1,16 @@
+.postInputOption{
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    justify-content:space-between;
+    cursor: pointer;
+}
+
+.postInputOption:hover {
+    background-color:whitesmoke;
+    border-radius:10px;
+}
+
+.postInputOption__name{
+    margin-left: 3px;
+}

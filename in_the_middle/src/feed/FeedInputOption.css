@@ -1,0 +1,6 @@
+.feedInputOption {
+    display: flex;
+    color: grey;
+    font-weight: 600;
+    padding: 5px;
+}

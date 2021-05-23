@@ -32,7 +32,9 @@ function Main() {
 
             {/* </div>
           <div className='selectBox'> */}
-            <button>Feed</button>
+            <Link to='/feed'>
+              <button>Feed</button>
+            </Link>
           </div>
         </div>
       </div>

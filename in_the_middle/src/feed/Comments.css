@@ -1,0 +1,73 @@
+.comments__container {
+    /* width: 80%; */
+    margin: 1em auto;
+    display: flex;
+    flex-direction: column;
+ 
+}
+
+.comments__top {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  /* height: 30px; */
+
+}
+
+.comments__top > .MuiAvatar-root {
+    width: 30px;
+    height: 30px;
+}
+
+.comments__top > form {
+  margin-left: 10px;
+  /* height: 50px; */
+}
+
+.comments__top > input {
+  height: 50px;
+}
+
+.comments__top > form > button {
+    margin-left: 3px;
+    background: #f0c14b;
+    /* border-color: #a88734 #9c7e31 #846a29; */
+    color: #111;
+    border: none;
+    padding: 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 40px;
+}
+
+.post__comments > p > b {
+    margin-right: 10px;
+    font-size: 15px;
+}
+
+.post__comments > p {
+    font-size: 15px;
+    font-family: 'Cairo', sans-serif;
+}
+
+.post__comments__comment{
+    display: flex;
+    border: 1px solid #ffecb4;
+    width: fit-content;
+    padding: 5px;
+    border-radius: 10px;
+    background-color:#ffecb4;
+    margin: 0em 0 0.5em 2em;
+    align-items: center;
+}
+
+.post__comments__comment > .MuiAvatar-root {
+    /* background-color: #ffecb4; */
+    width: 20px;
+    height: 20px;
+    font-size: 1rem;
+    margin-right: 0.5rem;
+
+}
+
+

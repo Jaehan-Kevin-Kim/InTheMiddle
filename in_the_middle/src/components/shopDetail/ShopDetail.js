@@ -3,7 +3,6 @@ import Header from "../header/Header";
 import "./ShopDetail.css";
 import { Avatar } from "@material-ui/core";
 import { Link, Redirect, withRouter, useHistory } from "react-router-dom";
-import useReactRouter from "use-react-router";
 import Shop from "../shop/Shop";
 
 const ShopDetail = ({ img, name, cost, location, description, shopDetail, views }) => {
@@ -15,7 +14,6 @@ const ShopDetail = ({ img, name, cost, location, description, shopDetail, views 
   // const [itemName, setItemName] = useState("");
   // const [description, setDescription] = useState("");
   console.log(img, name, cost, location);
-  // const { history, match } = useReactRouter;
   console.log(useHistory());
   const history = useHistory();
   // console.log({ history, match });
