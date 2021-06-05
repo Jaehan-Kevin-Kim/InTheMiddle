@@ -7,55 +7,6 @@ import ManageItemEach from "./ManageItemEach";
 
 const ManageItem = ({ userId }) => {
   const [items, setItems] = useState([]);
-  // const [uid, setUid] = useState(userId);
-  //   const [itemArray, setItemArray] = useState([]);
-  // console.log(userId);
-
-  // let itemArray = [];
-
-  //   useEffect(() => {
-  //     // console.log(userId);
-  //     console.log(uid);
-  //     // if (userId) {
-  //     //unsubscribe =
-
-  //     db.collection("items")
-  //       //   .doc(userId)
-  //       .orderBy("timestamp", "desc")
-  //       .onSnapshot(
-  //         (snapshot) =>
-  //           // setItems(
-  //           //   console.log(snapshot)
-  //           {
-  //             // snapshot.docs.map((doc) => {
-  //             //   if (doc.data().userId === userId) {
-  //             //     console.log(doc.data());
-  //                 setItems(
-  //                   snapshot.docs.map((doc) => ({
-  //                     id: doc.id,
-  //                     data: doc.data(),
-  //                   }))
-  //                 );
-  //                 // setItems(
-  //                 //   snapshot.docs.map((doc) => ({
-  //                 //     id: doc.id,
-  //                 //     data: doc.data(),
-  //                 //   }))
-  //                 // );
-  //               })
-  //             });
-  //         //   }
-  //         // )
-  //     //   );
-  //     console.log(items);
-  //     //   console.log("setItems", items);
-  //     //   console.log(userId);
-  //     // }
-  //     // console.log(items);
-  //     // return () => {
-  //     //   unsubscribe();
-  //     // };
-  //   }, []);
 
   useEffect(() => {
     db.collection("items")
@@ -70,21 +21,10 @@ const ManageItem = ({ userId }) => {
       );
   }, []);
 
-  //   items.map((item) => {
-  //     console.log(item.data);
-  //     console.log(item.data.userId);
-  //     console.log(userId);
-  //     if (item.data.userId === userId) {
-  //       setItemArray({
-  //         data: item.data,
-  //       });
-  //     }
-  //   });
-  // console.log(items);
   return (
-    <div className='container'>
+    <div className="container">
       <Header />
-      <div className='manageItem'>
+      <div className="manageItem">
         <h2> Manage Post</h2>
 
         <div>

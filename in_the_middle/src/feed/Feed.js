@@ -53,30 +53,30 @@ function Feed({ userId, user }) {
       photoUrl: user.photoUrl || "",
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
-
     setInput("");
   };
+
   return (
     <>
       <Header />
-      <div className='feed__container'>
-        <div className='feed__top'>
+      <div className="feed__container">
+        <div className="feed__top">
           <Avatar>{email && email.split("")[0]} </Avatar>
           <form onSubmit={onSubmit}>
-            <CreateIcon className='icon' />
-            <input type='text' value={input} onChange={(e) => setInput(e.target.value)} />
-            <button type='submit' onClick={onSubmit}>
+            <CreateIcon className="icon" />
+            <input type="text" value={input} onChange={(e) => setInput(e.target.value)} />
+            <button type="submit" onClick={onSubmit}>
               send
-            </button>{" "}
+            </button>
           </form>
         </div>
-        <div className='feed__bottom'>
-          <div className=''>
-            <FeedInputOption Icon={ImageIcon} name='Photo' color='#70B5F9' />
+        <div className="feed__bottom">
+          <div className="">
+            <FeedInputOption Icon={ImageIcon} name="Photo" color="#70B5F9" />
           </div>
-          <FeedInputOption Icon={SubscriptionsIcon} name='Video' color='#E7A33E' />
-          <FeedInputOption Icon={EventNoteIcon} name='Event' color='#C0CBCD' />
-          <FeedInputOption Icon={CalendarViewDayIcon} name='Write article' color='#7FC15E' />
+          <FeedInputOption Icon={SubscriptionsIcon} name="Video" color="#E7A33E" />
+          <FeedInputOption Icon={EventNoteIcon} name="Event" color="#C0CBCD" />
+          <FeedInputOption Icon={CalendarViewDayIcon} name="Write article" color="#7FC15E" />
         </div>
       </div>
       {posts.map(({ id, data: { description, message, email, photoUrl, timestamp } }) => (

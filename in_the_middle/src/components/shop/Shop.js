@@ -6,7 +6,7 @@ import ShopItem from "./ShopItem";
 import { db } from "../../firebase";
 import ShopDetail from "../shopDetail/ShopDetail";
 
-const Shop = ({ shopDetail, searchBtnClicked, itemViews }) => {
+const Shop = ({ shopDetail, searchBtnClicked, itemViews, searchedItem }) => {
   const [img, setImg] = useState("");
   const [name, setName] = useState("");
   const [cost, setCost] = useState("");
@@ -21,20 +21,29 @@ const Shop = ({ shopDetail, searchBtnClicked, itemViews }) => {
     setSelectedItem(items);
   };
 
-  console.log(itemViews);
+  console.log("searchedItem in Shop", searchedItem);
+  // console.log(itemViews);
   useEffect(() => {
-    db.collection("items")
-      .orderBy("timestamp", "desc")
-      .onSnapshot((snapshot) =>
-        setItems(
-          snapshot.docs.map((doc) => ({
-            id: doc.id,
-            data: doc.data(),
-          }))
-        )
-      );
-  }, []);
+    console.log("db 실행 in shop");
+    if (!searchedItem) {
+      db.collection("items")
+        .orderBy("timestamp", "desc")
+        .onSnapshot((snapshot) =>
+          setItems(
+            snapshot.docs.map((doc) => ({
+              id: doc.id,
+              data: doc.data(),
+            }))
+          )
+        );
+    } else {
+      console.log("searchedItem in Shop in else", searchedItem);
+      setItems(searchedItem);
+      console.log("items", items);
+    }
+  }, [searchedItem]);
 
+  console.log(items);
   return (
     <>
       {toShopDetail ? (
@@ -53,24 +62,24 @@ const Shop = ({ shopDetail, searchBtnClicked, itemViews }) => {
         </>
       ) : (
         // </Redirect>
-        <div className='container'>
+        <div className="container">
           {/* {searchBtnClicked ? <div></div> : } */}
           <Header />
-          <div className='shop__main'>
-            <div className='shop__main__addAction'>
-              <Link to='/manageItem'>
-                <button className='btn_post'>Manage Item</button>
+          <div className="shop__main">
+            <div className="shop__main__addAction">
+              <Link to="/manageItem">
+                <button className="btn_post">Manage Item</button>
               </Link>
-              <Link to='/uploadItem'>
-                <button className='btn_post'>Post Ad</button>
+              <Link to="/uploadItem">
+                <button className="btn_post">Post Ad</button>
               </Link>
             </div>
             {/* <div className='shop__link'> */}
-            <div className='items'>
+            <div className="items">
               {items.map(({ id, data: { itemName, itemImg, itemCost, itemRegion, itemDesc } }) => (
                 <>
                   <div
-                    className='item'
+                    className="item"
                     onClick={(e) => {
                       console.log(toShopDetail);
                       console.log(itemName);
@@ -84,8 +93,8 @@ const Shop = ({ shopDetail, searchBtnClicked, itemViews }) => {
                       setDescription(itemDesc);
                       setLocation(itemRegion);
                     }}>
-                    <img src={itemImg} alt='' />
-                    <p className='itemName'>{itemName}</p>
+                    <img src={itemImg} alt="" />
+                    <p className="itemName">{itemName}</p>
                     <p>${itemCost}</p>
                     {/* <p>{itemViews}</p> */}
                   </div>
