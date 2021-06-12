@@ -16,7 +16,8 @@ const Shop = ({ shopDetail, searchBtnClicked, itemViews, searchedItem }) => {
   const [details, setDetails] = useState();
   const [items, setItems] = useState([]);
   const [toShopDetail, setToShopDetail] = useState(shopDetail);
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedItem, setSelectedItem] = useState([]);
+  const [searchedItemActive, setSearchedItemActive] = useState(false);
   const selectItem = (items) => {
     setSelectedItem(items);
   };
@@ -36,12 +37,18 @@ const Shop = ({ shopDetail, searchBtnClicked, itemViews, searchedItem }) => {
             }))
           )
         );
+      // setSearchedItemActive(false);
     } else {
       console.log("searchedItem in Shop in else", searchedItem);
-      setItems(searchedItem);
+      setSelectedItem(searchedItem);
+      console.log("selectedItem", selectedItem);
+      setItems(selectedItem);
       console.log("items", items);
+      console.log(selectedItem);
+      setSearchedItemActive(true);
+      console.log("searchedItemActive", searchedItemActive);
     }
-  }, [searchedItem]);
+  }, [selectedItem]);
 
   console.log(items);
   return (
@@ -76,30 +83,61 @@ const Shop = ({ shopDetail, searchBtnClicked, itemViews, searchedItem }) => {
             </div>
             {/* <div className='shop__link'> */}
             <div className="items">
-              {items.map(({ id, data: { itemName, itemImg, itemCost, itemRegion, itemDesc } }) => (
-                <>
-                  <div
-                    className="item"
-                    onClick={(e) => {
-                      console.log(toShopDetail);
-                      console.log(itemName);
-                      console.log(views);
-                      e.preventDefault();
-                      setToShopDetail(true);
-                      setName(itemName);
-                      setImg(itemImg);
-                      setViews(itemViews + 1);
-                      setCost(itemCost);
-                      setDescription(itemDesc);
-                      setLocation(itemRegion);
-                    }}>
-                    <img src={itemImg} alt="" />
-                    <p className="itemName">{itemName}</p>
-                    <p>${itemCost}</p>
-                    {/* <p>{itemViews}</p> */}
-                  </div>
-                </>
-              ))}
+              {searchedItemActive
+                ? selectedItem.map(
+                    ({ id, data: { itemName, itemImg, itemCost, itemRegion, itemDesc } }) => (
+                      <>
+                        <div
+                          className="item"
+                          onClick={(e) => {
+                            console.log(toShopDetail);
+                            console.log(itemName);
+                            console.log(views);
+                            e.preventDefault();
+                            setToShopDetail(true);
+                            setName(itemName);
+                            setImg(itemImg);
+                            setViews(itemViews + 1);
+                            setCost(itemCost);
+                            setDescription(itemDesc);
+                            setLocation(itemRegion);
+                          }}>
+                          <img src={itemImg} alt="" />
+                          <p className="itemName">{itemName}</p>
+                          <p>${itemCost}</p>
+                          {/* <p>{itemViews}</p> */}
+                        </div>
+                      </>
+                    )
+                  )
+                : // }))}
+                  // {
+                  items.map(
+                    ({ id, data: { itemName, itemImg, itemCost, itemRegion, itemDesc } }) => (
+                      <>
+                        <div
+                          className="item"
+                          onClick={(e) => {
+                            console.log(toShopDetail);
+                            console.log(itemName);
+                            console.log(views);
+                            e.preventDefault();
+                            setToShopDetail(true);
+                            setName(itemName);
+                            setImg(itemImg);
+                            setViews(itemViews + 1);
+                            setCost(itemCost);
+                            setDescription(itemDesc);
+                            setLocation(itemRegion);
+                          }}>
+                          <img src={itemImg} alt="" />
+                          <p className="itemName">{itemName}</p>
+                          <p>${itemCost}</p>
+                          {/* <p>{itemViews}</p> */}
+                        </div>
+                      </>
+                    )
+                  )}
             </div>
           </div>
         </div>
