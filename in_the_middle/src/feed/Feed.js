@@ -11,19 +11,26 @@ import Post from "./Post";
 import firebase from "firebase";
 import { db } from "../firebase";
 import { Avatar } from "@material-ui/core";
-// import { useSelector } from "react-redux";
-// import { selectUser } from "./features/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+
+import { newPostAction } from "../actions/newPostsAction";
 
 function Feed({ userId, user }) {
   const [input, setInput] = useState("");
   const [posts, setPosts] = useState([]);
   const [email, setEmail] = useState();
   const [postId, setPostId] = useState("");
+  const dispatch = useDispatch();
+  const feeds = useSelector((state) => state.newpostsReducer.post);
+  if (feeds) {
+    console.log("feeds", feeds);
+  }
+  // console.log("feeds:", feeds);
   // const user = useSelector(selectUser);
   // console.log(user);
-  console.log(userId);
+  // console.log(userId);
 
-  console.log(user);
+  // console.log(user);
   // const displayName = user.displayName;
 
   useEffect(() => {
@@ -45,6 +52,31 @@ function Feed({ userId, user }) {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    const feed = {
+      email: user.displayName,
+      message: input,
+      photoUrl: user.photoUrl || "",
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      comment: "",
+    };
+    dispatch(newPostAction(feed));
+    // dispatch(
+    //   newPostAction({
+    //     email: user.displayName,
+    //     message: input,
+    //     photoUrl: user.photoUrl || "",
+    //     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    //     comment: "",
+    //   })
+    // );
+    // dispatch({
+    //   type: NEW_POST,
+    //   // type: NEW_POST,
+    //   // email: user.displayName,
+    //   // message: input,
+    //   // photoUrl: user.photoUrl || "",
+    //   // timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    // });
     db.collection("newPosts").add({
       email: user.displayName,
       // description: user.email,

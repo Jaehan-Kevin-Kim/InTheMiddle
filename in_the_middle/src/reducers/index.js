@@ -1,5 +1,5 @@
-import newpostsReducer from "./newposts";
-import itemsReducer from "./items";
+import newpostsReducer from "./newPostsReducer";
+import itemsReducer from "./itemsReducer";
 import { combineReducers } from "redux";
 
 const rootReducer = combineReducers({

@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./Shop.css";
 import Header from "../header/Header";
 import { Link, Redirect, Route } from "react-router-dom";
 import ShopItem from "./ShopItem";
 import { db } from "../../firebase";
 import ShopDetail from "../shopDetail/ShopDetail";
+import { useDispatch, useSelector } from "react-redux";
+import itemsReducer, { ITEM } from "../../reducers/itemsReducer";
 
 const Shop = ({ shopDetail, searchBtnClicked, itemViews, searchedItem }) => {
   const [img, setImg] = useState("");
@@ -17,40 +19,85 @@ const Shop = ({ shopDetail, searchBtnClicked, itemViews, searchedItem }) => {
   const [items, setItems] = useState([]);
   const [toShopDetail, setToShopDetail] = useState(shopDetail);
   const [selectedItem, setSelectedItem] = useState([]);
+  const [test, setTest] = useState("");
   const [searchedItemActive, setSearchedItemActive] = useState(false);
+
+  const dispatch = useDispatch();
+  const itemsFromRedux = useSelector((state) => state.itemsReducer);
   const selectItem = (items) => {
     setSelectedItem(items);
   };
 
-  console.log("searchedItem in Shop", searchedItem);
+  // console.log("searchedItem in Shop", searchedItem);
   // console.log(itemViews);
+
   useEffect(() => {
-    console.log("db 실행 in shop");
+    // console.log("db 실행 in shop");
+
     if (!searchedItem) {
+      console.log("searchedItem 없음");
       db.collection("items")
         .orderBy("timestamp", "desc")
-        .onSnapshot((snapshot) =>
+        .onSnapshot((snapshot) => {
           setItems(
             snapshot.docs.map((doc) => ({
               id: doc.id,
               data: doc.data(),
             }))
-          )
-        );
-      // setSearchedItemActive(false);
-    } else {
-      console.log("searchedItem in Shop in else", searchedItem);
-      setSelectedItem(searchedItem);
-      console.log("selectedItem", selectedItem);
-      setItems(selectedItem);
-      console.log("items", items);
-      console.log(selectedItem);
-      setSearchedItemActive(true);
-      console.log("searchedItemActive", searchedItemActive);
-    }
-  }, [selectedItem]);
+          );
+        });
 
-  console.log(items);
+      // });
+      // setSearchedItemActive(true);
+    } else {
+      searchedItemActiveFunction();
+    }
+    console.log("rerender");
+    console.log("searchedItemActive:", searchedItemActive);
+    console.log("test", test);
+  }, []);
+
+  const searchedItemActiveFunction = useCallback(
+    () => {
+      setSearchedItemActive(async (prev) => await prev);
+      setTest("testest");
+      console.log("itemsFromRedux", itemsFromRedux);
+      console.log("searchedItem 있음");
+      console.log("items", items);
+      // setSelectedItem(searchedItem);
+      console.log("searchedItem in Shop in else", searchedItem);
+    },
+    []
+    // }, []);
+  );
+  // useEffect(() => {
+  //   if (searchedItem) {
+  //     setSearchedItemActive((prev) => !prev);
+  //     console.log("itemsFromRedux", itemsFromRedux);
+  //     console.log("searchedItem 있음");
+  //     console.log("items", items);
+  //     setSelectedItem(searchedItem);
+  //     console.log("searchedItem in Shop in else", searchedItem);
+  //     console.log("rerender");
+  //     console.log("searchedItemActive:", searchedItemActive);
+  //   }
+  // }, [searchedItem]);
+
+  useEffect(() => {
+    return dispatch(
+      {
+        // itemsReducer({
+        type: ITEM,
+        payload: {
+          items,
+        },
+      }
+      // })
+    );
+  }, [items]);
+
+  // console.log(items);
+  console.log(searchedItem);
   return (
     <>
       {toShopDetail ? (
@@ -83,8 +130,8 @@ const Shop = ({ shopDetail, searchBtnClicked, itemViews, searchedItem }) => {
             </div>
             {/* <div className='shop__link'> */}
             <div className="items">
-              {searchedItemActive
-                ? selectedItem.map(
+              {searchedItem
+                ? searchedItem.map(
                     ({ id, data: { itemName, itemImg, itemCost, itemRegion, itemDesc } }) => (
                       <>
                         <div
