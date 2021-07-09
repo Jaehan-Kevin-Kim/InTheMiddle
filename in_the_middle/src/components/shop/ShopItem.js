@@ -13,7 +13,8 @@ function ShopItem({ id, img, name, cost, views }) {
 
   console.log(img, name, cost, views);
   return (
-    <Link onClick={onClickItem} className='shop__link' to='/shopDetail'>
+    // <Link onClick={onClickItem} className='shop__link' to='/shopDetail'>
+    <Link className="shop__link" to="/shopDetail">
       <div>
         {toShopDetail ? (
           <ShopDetail
@@ -22,12 +23,13 @@ function ShopItem({ id, img, name, cost, views }) {
             name={name}
             cost={cost}
             views={views}
-            location='calgary'
-            description='Nice'
+            location="calgary"
+            description="Nice"
+            onClick={onClickItem}
           />
         ) : (
           <div
-            className='item'
+            className="item"
             // onClick={() => onClickItem({ img, name, cost, views })}
             // onClick={
             //   <Link className='shop__link' to='/shopDetail'>
@@ -43,7 +45,7 @@ function ShopItem({ id, img, name, cost, views }) {
             //   </Link>
             // }
           >
-            <img src={img} alt='' />
+            <img src={img} alt="" />
             <p>{name}</p>
             <p>${cost}</p>
             <p>{views}</p>

@@ -9,9 +9,11 @@ import { Avatar } from "@material-ui/core";
 import "./Header.css";
 import { auth, db } from "../../firebase";
 import { useHistory } from "react-router";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import SearchResult from "../searchBar/SearchResult";
 import Shop from "../shop/Shop";
+import { useDispatch } from "react-redux";
+import { ITEM } from "../../reducers/itemsReducer";
 
 const Header = () => {
   const history = useHistory();
@@ -21,6 +23,8 @@ const Header = () => {
   const [searchCategory, setSearchCategory] = useState("");
   const [searchLocation, setSearchLocation] = useState("");
   const [searchBtnClicked, setSearchBtnClicked] = useState(false);
+  const [logOutActive, setLogOutActive] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     db.collection("items")
@@ -39,14 +43,29 @@ const Header = () => {
     setSearchBtnClicked(false);
     // setSearchedItem([]);
     // setSearchedItem([]);
-    console.log(searchedItem);
+    // console.log(searchedItem);
   }, [searchBtnClicked]);
 
+  useEffect(() => {
+    console.log(searchedItem);
+
+    return dispatch(
+      {
+        // itemsReducer({
+        type: ITEM,
+        payload: {
+          items: searchedItem,
+        },
+      }
+      // })
+    );
+  }, [searchedItem]);
+
   const itemSearch = () => {
-    console.log(searchName);
-    console.log("itemSearchButton");
+    // console.log(searchName);
+    // console.log("itemSearchButton");
     if (searchName !== "" || searchCategory !== "" || searchLocation !== "") {
-      console.log("check");
+      // console.log("check");
       setSearchBtnClicked(true);
       /*
       const result = items.filter((item) => {
@@ -69,15 +88,15 @@ const Header = () => {
 
       items.map((item) => {
         // let value;
-        console.log(item.data.itemName);
-        console.log(item.data.itemName.toLowerCase().includes(searchName.toLowerCase()));
+        // console.log(item.data.itemName);
+        // console.log(item.data.itemName.toLowerCase().includes(searchName.toLowerCase()));
 
         if (item.data.itemName.toLowerCase().includes(searchName.toLowerCase())) {
-          console.log("value", item.data.itemName);
+          // console.log("value", item.data.itemName);
 
           setSearchedItem((prevSearched) => {
-            console.log("prevSearched", prevSearched);
-            console.log(searchedItem);
+            // console.log("prevSearched", prevSearched);
+            // console.log(searchedItem);
             return [...prevSearched, item];
           });
 
@@ -117,10 +136,15 @@ const Header = () => {
 
   const logoutEvent = () => {
     auth.signOut();
-    history.push("/");
+    // history.push("/");
+    setLogOutActive(true);
+
+    // <Link to="/" />;
   };
 
-  return (
+  return logOutActive ? (
+    <Redirect to="/" />
+  ) : (
     <>
       <div className="header__main">
         <div className="header__main__left">
@@ -163,9 +187,11 @@ const Header = () => {
           <FavoriteBorderIcon />
           <NotificationsNoneIcon />
           <ChatBubbleOutlineIcon />
-          <a href="/">
-            <Avatar className="header__main__right__avatar">J</Avatar>
-          </a>
+          {/* <a href="/"> */}
+          <Avatar onClick={logoutEvent} className="header__main__right__avatar">
+            J
+          </Avatar>
+          {/* </a> */}
         </div>
       </div>
     </>

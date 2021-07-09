@@ -6,6 +6,10 @@ import firebase from "firebase";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  const [signUpEmail, setSignUpEmail] = useState("");
+  const [signUpPassword, setSignUpPassword] = useState("");
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -46,11 +50,11 @@ const Login = () => {
   const signUp = (event) => {
     event.preventDefault();
     auth
-      .createUserWithEmailAndPassword(email, password)
+      .createUserWithEmailAndPassword(signUpEmail, signUpPassword)
       .then((authUser) => {
         //update user
         return authUser.user.updateProfile({
-          displayName: email,
+          displayName: signUpEmail,
         });
       })
       .catch((error) => alert(error.message));
@@ -60,52 +64,52 @@ const Login = () => {
     event.preventDefault();
 
     const data = auth
-      .signInWithEmailAndPassword(email, password)
+      .signInWithEmailAndPassword(loginEmail, loginPassword)
       .catch((error) => alert(error.message));
     console.log(data);
   };
 
   return (
-    <div className='login'>
-      <div className='loginWithEmail'>
+    <div className="login">
+      <div className="loginWithEmail">
         <input
-          type='email'
-          value={email}
-          placeholder='Email'
-          onChange={(e) => setEmail(e.target.value)}
+          type="email"
+          value={loginEmail}
+          placeholder="Email"
+          onChange={(e) => setLoginEmail(e.target.value)}
         />
         <input
-          type='password'
-          value={password}
-          placeholder='Password'
-          onChange={(e) => setPassword(e.target.value)}
+          type="password"
+          value={loginPassword}
+          placeholder="Password"
+          onChange={(e) => setLoginPassword(e.target.value)}
         />
-        <button type='submit' onClick={login}>
+        <button type="submit" onClick={login}>
           Login
         </button>
       </div>
-      <div className='authBtns'>
-        <button onClick={onSocialClick} name='google' className='authBtn'>
+      <div className="authBtns">
+        <button onClick={onSocialClick} name="google" className="authBtn">
           Continue with Google
         </button>
-        <button onClick={onSocialClick} name='github' className='authBtn'>
+        <button onClick={onSocialClick} name="github" className="authBtn">
           Continue with Github
         </button>
       </div>
-      <div className='signUp'>
+      <div className="signUp">
         <input
-          type='email'
-          value={email}
-          placeholder='Email'
-          onChange={(e) => setEmail(e.target.value)}
+          type="email"
+          value={signUpEmail}
+          placeholder="Email"
+          onChange={(e) => setSignUpEmail(e.target.value)}
         />
         <input
-          type='password'
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
-          placeholder='Password'
+          type="password"
+          onChange={(e) => setSignUpPassword(e.target.value)}
+          value={signUpPassword}
+          placeholder="Password"
         />
-        <button type='submit' onClick={signUp}>
+        <button type="submit" onClick={signUp}>
           sign up
         </button>
       </div>

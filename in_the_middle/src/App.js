@@ -18,7 +18,8 @@ const App = () => {
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
-      console.log(user.uid);
+      // console.log(user.uid);
+      // console.log(user);
       if (user) {
         setIsLoggedIn(true);
         setUserId(user.uid);
@@ -30,7 +31,7 @@ const App = () => {
       }
     });
     console.log(isLoggedIn);
-  });
+  }, [user]);
   return (
     <>
       {/* <Shop /> */}
@@ -38,28 +39,31 @@ const App = () => {
       <Router>
         <Switch>
           {isLoggedIn ? (
-            <Route exact path='/' component={Main}>
+            <Route exact path="/" component={Main}>
               <Main />
             </Route>
           ) : (
-            <Route exact path='/' component={Login}>
+            <Route exact path="/" component={Login}>
               <Login />
             </Route>
           )}
         </Switch>
-        <Route path='/shop' component={Shop}>
-          <Shop />
-        </Route>
-        <Route path='/feed' component={Feed}>
-          <Feed userId={userId} user={user} userEmail={userEmail} />
-        </Route>
-        <Route path='/shopDetail' component={ShopDetail}>
+
+        <Route exact path="/shopDetail" component={ShopDetail}>
           <ShopDetail />
         </Route>
-        <Route path='/uploadItem' component={UploadItem}>
+
+        <Route path="/shop" component={Shop}>
+          <Shop />
+        </Route>
+        <Route path="/feed" component={Feed}>
+          <Feed userId={userId} user={user} userEmail={userEmail} />
+        </Route>
+
+        <Route path="/uploadItem" component={UploadItem}>
           <UploadItem userId={userId} />
         </Route>
-        <Route path='/manageItem' component={ManageItem}>
+        <Route path="/manageItem" component={ManageItem}>
           <ManageItem userId={userId} />
         </Route>
       </Router>
