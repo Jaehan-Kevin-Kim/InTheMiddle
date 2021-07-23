@@ -47,25 +47,26 @@ const App = () => {
               <Login />
             </Route>
           )}
+
+          <Route exact path="/shopDetail" component={ShopDetail}>
+            <ShopDetail />
+          </Route>
+
+          <Route path="/shop" component={Shop}>
+            <Shop />
+          </Route>
+
+          <Route path="/feed" component={Feed}>
+            <Feed userId={userId} user={user} userEmail={userEmail} />
+          </Route>
+
+          <Route path="/uploadItem" component={UploadItem}>
+            <UploadItem userId={userId} />
+          </Route>
+          <Route path="/manageItem" component={ManageItem}>
+            <ManageItem userId={userId} />
+          </Route>
         </Switch>
-
-        <Route exact path="/shopDetail" component={ShopDetail}>
-          <ShopDetail />
-        </Route>
-
-        <Route path="/shop" component={Shop}>
-          <Shop />
-        </Route>
-        <Route path="/feed" component={Feed}>
-          <Feed userId={userId} user={user} userEmail={userEmail} />
-        </Route>
-
-        <Route path="/uploadItem" component={UploadItem}>
-          <UploadItem userId={userId} />
-        </Route>
-        <Route path="/manageItem" component={ManageItem}>
-          <ManageItem userId={userId} />
-        </Route>
       </Router>
     </>
   );

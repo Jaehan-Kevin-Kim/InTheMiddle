@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../header/Header";
 import "./ShopDetail.css";
 import { Avatar } from "@material-ui/core";
@@ -16,6 +16,7 @@ const ShopDetail = ({ img, name, cost, location, description, shopDetail, views 
   console.log(img, name, cost, location);
   console.log(useHistory());
   const history = useHistory();
+
   // console.log({ history, match });
   // console.log(props);
 

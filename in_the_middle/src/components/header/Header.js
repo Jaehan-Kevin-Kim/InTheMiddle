@@ -134,6 +134,12 @@ const Header = () => {
     // return <Shop searchedItem={searchedItem} />;
   };
 
+  const onKeyPress = (event) => {
+    if (event.key === "Enter") {
+      itemSearch(true);
+    }
+  };
+
   const logoutEvent = () => {
     auth.signOut();
     // history.push("/");
@@ -157,6 +163,7 @@ const Header = () => {
               value={searchName}
               onChange={(e) => setSearchName(e.target.value)}
               placeholder="Search item or location..."
+              onKeyPress={onKeyPress}
             />
             <div className="ExpandMoreIcon">
               <input
@@ -164,6 +171,7 @@ const Header = () => {
                 value={searchCategory}
                 onChange={(e) => setSearchCategory(e.target.value)}
                 placeholder="All category"
+                onKeyPress={onKeyPress}
               />
               <ExpandMoreIcon />
             </div>
@@ -174,6 +182,7 @@ const Header = () => {
                 value={searchLocation}
                 onChange={(e) => setSearchLocation(e.target.value)}
                 placeholder="Calgary, Alberta"
+                onKeyPress={onKeyPress}
               />
             </div>
             <div className="searchBox">

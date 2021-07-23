@@ -10,8 +10,9 @@ const ManageItem = ({ userId }) => {
 
   useEffect(() => {
     db.collection("items")
-      .orderBy("timestamp", "desc")
-      .onSnapshot((snapshot) =>
+    .orderBy("timestamp", "desc")
+    .onSnapshot((snapshot) =>
+    // const result = snapshot.docs.filter(v => v.id = )
         setItems(
           snapshot.docs.map((doc) => ({
             id: doc.id,
