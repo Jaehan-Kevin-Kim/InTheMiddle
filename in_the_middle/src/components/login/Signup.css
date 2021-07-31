@@ -1,0 +1,84 @@
+/* body {
+  padding: 1em 0;
+  height: 600px;
+  background: rgb(255, 236, 130);    
+} */
+
+.signUpContainer {
+  margin: 20px auto;
+  border: 1px solid black;
+  width: 70vh;
+  height: 80vh;
+  background: rgb(255, 236, 130); 
+}
+
+.signUpHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.signUpHeader > h1 {
+  font-size: 40px;
+}
+
+.inputContainer {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.inputLabel {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  border: none;
+  border-bottom: 1px solid lightgray;
+  margin-bottom: 25px;
+  width: 35vw;
+  height: 5vh;
+  padding: 3px 5px;
+  margin-top: 5px;
+}
+
+.submitBtn {
+  margin-top: 10px;
+  width: 35vw;
+  border-radius: 20px;
+  border: none;
+  padding: 10px;
+  background-color: rgb(255, 236, 130);
+  border: 1px solid lightgray;
+}
+
+.submitBtn:hover {
+  background-color: black; 
+  color: white;
+}
+
+.linkLogin {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  outline: none;
+}
+
+.backToLogin {
+  display: inline;
+  color: red;
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: 5px;
+  padding: 5px;
+}
+
+.backToLogin:hover {
+  background-color: lightgoldenrodyellow;
+}

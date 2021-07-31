@@ -4,6 +4,7 @@ import Main from "./components/main/Main";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import Login from "./components/login/Login";
 import Shop from "./components/shop/Shop";
+import Signup from "./components/login/Signup";
 import Feed from "./feed/Feed";
 import ShopDetail from "./components/shopDetail/ShopDetail";
 import UploadItem from "./components/uploadItem/UploadItem";
@@ -47,6 +48,9 @@ const App = () => {
               <Login />
             </Route>
           )}
+          <Route exact path="/signup" component={Signup}>
+            <Signup />
+          </Route>
 
           <Route exact path="/shopDetail" component={ShopDetail}>
             <ShopDetail />

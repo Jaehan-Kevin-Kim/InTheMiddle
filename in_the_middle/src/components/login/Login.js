@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import "./Login.css";
 import { db, auth } from "../../firebase";
 import firebase from "firebase";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGoogle, faGithub } from "@fortawesome/free-brands-svg-icons";
+// import googleImg from "../../images/googleImg.png";
+import { Link, Redirect, Route } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -70,50 +74,54 @@ const Login = () => {
   };
 
   return (
-    <div className="login">
-      <div className="loginWithEmail">
-        <input
-          type="email"
-          value={loginEmail}
-          placeholder="Email"
-          onChange={(e) => setLoginEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          value={loginPassword}
-          placeholder="Password"
-          onChange={(e) => setLoginPassword(e.target.value)}
-        />
-        <button type="submit" onClick={login}>
-          Login
-        </button>
+    <>
+      <div className="loginContainer">
+        <div className="header">
+          <h1>In the middle</h1>
+        </div>
+        <div className="body">
+          <div className="loginInfo">
+            <p>Email</p>
+            <input
+              className="loginInfo__input"
+              type="email"
+              value={loginEmail}
+              onChange={(e) => setLoginEmail(e.target.value)}
+              placeholder="Email Address"
+            />
+          </div>
+          <div className="loginInfo">
+            <p>Password</p>
+            <input
+              className="loginInfo__input"
+              type="password"
+              value={loginPassword}
+              onChange={(e) => setLoginPassword(e.target.value)}
+              placeholder="Password"
+            />
+          </div>
+          <div className="loginOption">
+            <button className="loginBtn" type="submit" onClick={login}>
+              Login
+            </button>
+          </div>
+          <div className="authBtns">
+            <button onClick={onSocialClick} name="google" className="authBtn">
+              {/* <img src="../../images/google-color.png" alt="googleLogo" /> */}
+              <FontAwesomeIcon icon={faGoogle} />
+            </button>
+            <button onClick={onSocialClick} name="github" className="authBtn">
+              <FontAwesomeIcon icon={faGithub} />
+            </button>
+          </div>
+          <div className="signup">
+            <Link to="/signup">
+              <button className="signsUpBtn">Sign up</button>
+            </Link>
+          </div>
+        </div>
       </div>
-      <div className="authBtns">
-        <button onClick={onSocialClick} name="google" className="authBtn">
-          Continue with Google
-        </button>
-        <button onClick={onSocialClick} name="github" className="authBtn">
-          Continue with Github
-        </button>
-      </div>
-      <div className="signUp">
-        <input
-          type="email"
-          value={signUpEmail}
-          placeholder="Email"
-          onChange={(e) => setSignUpEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          onChange={(e) => setSignUpPassword(e.target.value)}
-          value={signUpPassword}
-          placeholder="Password"
-        />
-        <button type="submit" onClick={signUp}>
-          sign up
-        </button>
-      </div>
-    </div>
+    </>
   );
 };
 

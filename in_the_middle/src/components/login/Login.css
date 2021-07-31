@@ -1,0 +1,128 @@
+/* html {
+    height: 600px;
+} */
+
+/* body {
+    padding: 1em 0;
+    height: 600px;
+    background: rgb(255, 236, 130);    
+}
+
+#root {
+    height: 600px;
+} */
+.loginContainer {
+    /* background: blue !important; */
+    width: 50%;
+    margin-top:1em;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5em 3em;
+    /* height: 400px; */
+    height: 80%;
+    /* justify-content: space-evenly; */
+}
+h1 {
+    font-size: 40px;
+ }
+
+.body {
+    margin-top: 2em;
+    width: 100%;
+}
+
+.body .loginInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* border-bottom: 1px solid lightgray; */
+    /* height: 70px; */
+}
+
+.loginInfo__input  {
+    /* height: 15px; */
+    border: none;
+    border-bottom: 1px solid lightgray;
+    width: 100%;
+   
+}
+
+.loginOption{
+    margin-bottom: 1.5em;
+}
+.loginBtn{
+    width: 100%;
+    border-radius: 20px;
+    border: none;
+    padding: 10px;
+    background: rgb(255, 236, 130); 
+    /* border: 1px solid lightgray; */
+    color: black;
+    cursor: pointer;
+}
+
+.loginBtn:hover {
+    background: black; 
+    color: white;
+}
+
+.authBtns {
+    display: flex;
+    justify-content: center;
+}
+
+.authBtns .authBtn {
+width: 2rem;
+background: transparent;
+border: none;
+margin: 0 0.25rem;
+cursor: pointer;
+
+}
+
+.authBtns .authBtn {
+  
+    width: 2rem;
+    /* background: lightgray; */
+    border: none;
+    margin: 0 0.25rem;
+    cursor: pointer;
+    
+    }
+
+.authBtn .svg-inline--fa{
+    font-size: 1.8rem;
+    padding: 2px;
+
+}
+
+.authBtn .svg-inline--fa:hover{
+    /* padding: 2px; */
+    /* border-radius: 50%; */
+    /* font-size: 1.5rem; */
+    /* background: lightgray; */
+    /* background: rgb(255, 236, 130); */
+    color: gray; 
+}
+
+.signup {
+    margin-top: 1.5em;
+    /* padding: 5px; */
+    
+}
+.signsUpBtn:hover {
+    color: black;
+    background: rgb(255, 236, 130); 
+}
+.signsUpBtn {
+    width: 100%;
+    border-radius: 20px;
+    border: none;
+    padding: 10px;
+    /* border: 1px solid lightgray; */
+    background: black; 
+    color: white;
+    cursor: pointer;
+}
+

@@ -107,8 +107,6 @@ function Feed({ userId, user }) {
             <FeedInputOption Icon={ImageIcon} name="Photo" color="#70B5F9" />
           </div>
           <FeedInputOption Icon={SubscriptionsIcon} name="Video" color="#E7A33E" />
-          <FeedInputOption Icon={EventNoteIcon} name="Event" color="#C0CBCD" />
-          <FeedInputOption Icon={CalendarViewDayIcon} name="Write article" color="#7FC15E" />
         </div>
       </div>
       {posts.map(({ id, data: { description, message, email, photoUrl, timestamp } }) => (
