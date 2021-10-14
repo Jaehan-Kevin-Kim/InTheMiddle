@@ -1,41 +1,50 @@
 .upload {
-   align-items: center;
-   height: 100%;
-   background: rgba(255, 255, 251, 0.76);
+  align-items: center;
+  height: 100%;
+  background: rgba(255, 255, 251, 0.76);
 }
+
 .upload_form {
   display: flex;
   flex-direction: column;
 
   /* height: 100%; */
-  
+
 }
 
-.upload_form > h1 {
+.upload_form>h1 {
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
-.upload_input { 
+.upload_input {
   display: flex;
   width: 100%;
   align-items: center;
 }
 
-.upload_input > h3 {
+.upload_input>h3 {
   margin-right: 10px;
   margin-bottom: 10px;
 }
+
 /* .upload_input > input {
   align-items: right;
 } */
-.imageUpload{
+.imageUpload {
+  /* display: flex;
+  align-items: center; */
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: white;
+  border-top: solid lightgrey;
 }
-.imageUploadProgress {
-  display: none;
-}
+
 
 /* .btn_post {
   align-items: right;

@@ -1,6 +1,17 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ShopDetail from "../shopDetail/ShopDetail";
+import styled from "styled-components";
+
+const ShopItemEach = styled.div``;
+
+const ItemEach = styled.div``;
+
+const ItemImg = styled.img``;
+
+const ItemName = styled.p``;
+
+const ItemCost = styled.p``;
 
 function ShopItem({ id, img, name, cost, views }) {
   const [toShopDetail, setToShopDetail] = useState(false);
@@ -13,9 +24,8 @@ function ShopItem({ id, img, name, cost, views }) {
 
   console.log(img, name, cost, views);
   return (
-    // <Link onClick={onClickItem} className='shop__link' to='/shopDetail'>
     <Link className="shop__link" to="/shopDetail">
-      <div>
+      <ShopItemEach>
         {toShopDetail ? (
           <ShopDetail
             key={id}
@@ -28,30 +38,16 @@ function ShopItem({ id, img, name, cost, views }) {
             onClick={onClickItem}
           />
         ) : (
-          <div
-            className="item"
-            // onClick={() => onClickItem({ img, name, cost, views })}
-            // onClick={
-            //   <Link className='shop__link' to='/shopDetail'>
-            //     <ShopDetail
-            //       key={id}
-            //       img={img}
-            //       name={name}
-            //       cost={cost}
-            //       location='calgary'
-            //       description='Nice'
-            //       views={views}
-            //     />
-            //   </Link>
-            // }
-          >
+          <ItemEach>
             <img src={img} alt="" />
             <p>{name}</p>
             <p>${cost}</p>
-            <p>{views}</p>
-          </div>
+            <ItemImg src={img} alt="" />
+            <ItemName>{name}</ItemName>
+            <ItemCost>${cost}</ItemCost>
+          </ItemEach>
         )}
-      </div>
+      </ShopItemEach>
     </Link>
   );
 }

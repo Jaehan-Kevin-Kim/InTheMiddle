@@ -10,6 +10,8 @@ import ShopDetail from "./components/shopDetail/ShopDetail";
 import UploadItem from "./components/uploadItem/UploadItem";
 import { auth } from "./firebase";
 import ManageItem from "./components/manageItem/ManageItem";
+import MyAccount from "./components/myAccount/MyAccount";
+import MyItems from "./components/myItems/MyItems";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -50,6 +52,13 @@ const App = () => {
           )}
           <Route exact path="/signup" component={Signup}>
             <Signup />
+          </Route>
+          <Route exact path="/myaccount" component={MyAccount}>
+            <MyAccount />
+          </Route>
+
+          <Route exact path="/myitems" component={MyItems}>
+            <MyItems />
           </Route>
 
           <Route exact path="/shopDetail" component={ShopDetail}>

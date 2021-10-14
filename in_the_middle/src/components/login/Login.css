@@ -11,28 +11,18 @@
 #root {
     height: 600px;
 } */
-.loginContainer {
-    /* background: blue !important; */
-    width: 50%;
-    margin-top:1em;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    padding: 1.5em 3em;
-    /* height: 400px; */
-    height: 80%;
-    /* justify-content: space-evenly; */
-}
-h1 {
-    font-size: 40px;
- }
 
-.body {
+
+.loginBody {
     margin-top: 2em;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.body .loginInfo {
+.loginBody .loginInfo {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -44,7 +34,11 @@ h1 {
     /* height: 15px; */
     border: none;
     border-bottom: 1px solid lightgray;
-    width: 100%;
+    /* width: 100%; */
+    width: 35vw;
+    height: 5vh;
+    padding: 3px 5px;
+    margin-top: 5px;
    
 }
 
@@ -52,7 +46,8 @@ h1 {
     margin-bottom: 1.5em;
 }
 .loginBtn{
-    width: 100%;
+    /* width: 100%; */
+    width: 35vw;
     border-radius: 20px;
     border: none;
     padding: 10px;
@@ -70,6 +65,7 @@ h1 {
 .authBtns {
     display: flex;
     justify-content: center;
+    width: 35vw;
 }
 
 .authBtns .authBtn {
@@ -80,20 +76,19 @@ margin: 0 0.25rem;
 cursor: pointer;
 
 }
-
+/* 
 .authBtns .authBtn {
-  
     width: 2rem;
-    /* background: lightgray; */
     border: none;
     margin: 0 0.25rem;
     cursor: pointer;
     
-    }
+    } */
 
 .authBtn .svg-inline--fa{
     font-size: 1.8rem;
     padding: 2px;
+    z-index:-1000;
 
 }
 
@@ -116,7 +111,8 @@ cursor: pointer;
     background: rgb(255, 236, 130); 
 }
 .signsUpBtn {
-    width: 100%;
+    /* width: 100%; */
+    width: 35vw;
     border-radius: 20px;
     border: none;
     padding: 10px;

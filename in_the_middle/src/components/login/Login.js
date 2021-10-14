@@ -1,11 +1,121 @@
 import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 import "./Login.css";
 import { db, auth } from "../../firebase";
 import firebase from "firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle, faGithub } from "@fortawesome/free-brands-svg-icons";
-// import googleImg from "../../images/googleImg.png";
 import { Link, Redirect, Route } from "react-router-dom";
+
+const LoginContainer = styled.div`
+  width: 50%;
+  margin: 1em auto;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5em 3em;
+  height: 80%;
+  align-items: center;
+  justify-content: center;
+`;
+
+const LoginHeader = styled.div`
+  & h1 {
+    font-size: 40px;
+  }
+`;
+
+const LoginBody = styled.div`
+  margin-top: 2em;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+const LoginInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+const LoginInfoInput = styled.input`
+  border: none;
+  border-bottom: 1px solid lightgray;
+  width: 35vw;
+  height: 5vh;
+  padding: 3px 5px;
+  margin-top: 5px;
+`;
+
+const LoginOption = styled.div`
+  margin-bottom: 1.5em;
+`;
+
+const LoginBtn = styled.button`
+  width: 35vw;
+  border-radius: 20px;
+  border: none;
+  padding: 10px;
+  background: rgb(255, 236, 130);
+  color: black;
+  cursor: pointer;
+`;
+
+// }
+const AuthBtns = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 35vw;
+`;
+
+const AuthBtn = styled.button`
+  width: 2rem;
+  background: transparent;
+  border: none;
+  margin: 0 0.25rem;
+  cursor: pointer;
+
+  & .svg-inline--fa {
+    font-size: 1.8rem;
+    padding: 2px;
+    z-index: -1000;
+  }
+  & .svg-inline--fa:hover {
+    color: gray;
+  }
+`;
+
+// &.totalProjectBox {
+//   background-color: #11569a;
+//   color: white;
+// }
+
+// &:hover {
+//   transform: scale(1.02);
+// }
+
+const SignUp = styled.div`
+  margin-top: 1.5em;
+`;
+
+const SignUpBtn = styled.button`
+  width: 35vw;
+  border-radius: 20px;
+  border: none;
+  padding: 10px;
+  background: black;
+  color: white;
+  cursor: pointer;
+  &:hover {
+    color: black;
+    background: rgb(255, 236, 130);
+  }
+`;
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -14,6 +124,7 @@ const Login = () => {
   const [loginPassword, setLoginPassword] = useState("");
   const [signUpEmail, setSignUpEmail] = useState("");
   const [signUpPassword, setSignUpPassword] = useState("");
+
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -31,40 +142,46 @@ const Login = () => {
       unsubscriobe();
     };
   }, [user]);
-  console.log(user);
+  // console.log(user);
 
   // useEffect(() => {
   //   db.collection
   // })
 
-  const onSocialClick = async (event) => {
-    const {
-      target: { name },
-    } = event;
+  const onGoogleClick = async (event) => {
     let provider;
-    if (name === "google") {
-      provider = new firebase.auth.GoogleAuthProvider();
-    } else if (name === "github") {
-      provider = new firebase.auth.GithubAuthProvider();
-    }
+
+    provider = new firebase.auth.GoogleAuthProvider();
+
     const data = await auth.signInWithPopup(provider);
-    console.log(data);
+    // console.log("provider", provider);
+    // console.log(data);
   };
 
-  const signUp = (event) => {
-    event.preventDefault();
-    auth
-      .createUserWithEmailAndPassword(signUpEmail, signUpPassword)
-      .then((authUser) => {
-        //update user
-        return authUser.user.updateProfile({
-          displayName: signUpEmail,
-        });
-      })
-      .catch((error) => alert(error.message));
+  const onGithubClick = async (event) => {
+    let provider;
+    provider = new firebase.auth.GithubAuthProvider();
+
+    const data = await auth.signInWithPopup(provider);
+    // console.log("provider", provider);
+    // console.log(data);
   };
 
-  const login = (event) => {
+  // const signUp = (event) => {
+  //   event.preventDefault();
+  //   auth
+  //     .createUserWithEmailAndPassword(signUpEmail, signUpPassword)
+  //     .then((authUser) => {
+  //       //update user
+  //       return authUser.user.updateProfile({
+  //         displayName: signUpEmail,
+  //       });
+  //     })
+  //     .catch((error) => alert(error.message));
+  // };
+
+  const loginEvent = (event) => {
+    console.log(event.target.name);
     event.preventDefault();
 
     const data = auth
@@ -73,54 +190,62 @@ const Login = () => {
     console.log(data);
   };
 
+  // const onKeyPress = (e) => {
+  //   if (e.key === "Enter") {
+  //     loginEvent();
+  //   }
+  // };
+
   return (
     <>
-      <div className="loginContainer">
-        <div className="header">
+      <LoginContainer>
+        <LoginHeader>
           <h1>In the middle</h1>
-        </div>
-        <div className="body">
-          <div className="loginInfo">
+        </LoginHeader>
+        <LoginBody>
+          <LoginInfo>
             <p>Email</p>
-            <input
-              className="loginInfo__input"
+            <LoginInfoInput
               type="email"
               value={loginEmail}
               onChange={(e) => setLoginEmail(e.target.value)}
               placeholder="Email Address"
+              // onKeyPress={onKeyPress}
             />
-          </div>
-          <div className="loginInfo">
+          </LoginInfo>
+          <LoginInfo>
             <p>Password</p>
-            <input
-              className="loginInfo__input"
+            <LoginInfoInput
               type="password"
               value={loginPassword}
               onChange={(e) => setLoginPassword(e.target.value)}
               placeholder="Password"
+              // onKeyPress={onKeyPress}
             />
-          </div>
-          <div className="loginOption">
-            <button className="loginBtn" type="submit" onClick={login}>
+          </LoginInfo>
+          <LoginOption>
+            <LoginBtn name="loginbutton" type="submit" onClick={loginEvent}>
               Login
-            </button>
-          </div>
-          <div className="authBtns">
-            <button onClick={onSocialClick} name="google" className="authBtn">
+            </LoginBtn>
+          </LoginOption>
+          <AuthBtns>
+            <AuthBtn name="google" onClick={onGoogleClick}>
               {/* <img src="../../images/google-color.png" alt="googleLogo" /> */}
-              <FontAwesomeIcon icon={faGoogle} />
-            </button>
-            <button onClick={onSocialClick} name="github" className="authBtn">
+
+              {/* Google */}
+              <FontAwesomeIcon icon={faGoogle} style={{ zIndex: -10 }} />
+            </AuthBtn>
+            <AuthBtn name="github" onClick={onGithubClick}>
               <FontAwesomeIcon icon={faGithub} />
-            </button>
-          </div>
-          <div className="signup">
+            </AuthBtn>
+          </AuthBtns>
+          <SignUp>
             <Link to="/signup">
-              <button className="signsUpBtn">Sign up</button>
+              <SignUpBtn>Sign up</SignUpBtn>
             </Link>
-          </div>
-        </div>
-      </div>
+          </SignUp>
+        </LoginBody>
+      </LoginContainer>
     </>
   );
 };

@@ -5,7 +5,7 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import NotificationsNoneIcon from "@material-ui/icons/NotificationsNone";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { Avatar } from "@material-ui/core";
+import { Avatar, colors } from "@material-ui/core";
 import "./Header.css";
 import { auth, db } from "../../firebase";
 import { useHistory } from "react-router";
@@ -24,6 +24,7 @@ const Header = () => {
   const [searchLocation, setSearchLocation] = useState("");
   const [searchBtnClicked, setSearchBtnClicked] = useState(false);
   const [logOutActive, setLogOutActive] = useState(false);
+  const [expandAvatar, setExpandAvatar] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -34,16 +35,13 @@ const Header = () => {
           snapshot.docs.map((doc) => ({
             id: doc.id,
             data: doc.data(),
-          }))
-        )
+          })),
+        ),
       );
   }, []);
 
   useEffect(() => {
     setSearchBtnClicked(false);
-    // setSearchedItem([]);
-    // setSearchedItem([]);
-    // console.log(searchedItem);
   }, [searchBtnClicked]);
 
   useEffect(() => {
@@ -51,52 +49,22 @@ const Header = () => {
 
     return dispatch(
       {
-        // itemsReducer({
         type: ITEM,
         payload: {
           items: searchedItem,
         },
-      }
+      },
       // })
     );
   }, [searchedItem]);
 
   const itemSearch = () => {
-    // console.log(searchName);
-    // console.log("itemSearchButton");
     if (searchName !== "" || searchCategory !== "" || searchLocation !== "") {
-      // console.log("check");
       setSearchBtnClicked(true);
-      /*
-      const result = items.filter((item) => {
-        item.data.itemName.toLowerCase().includes(searchName.toLowerCase());
-
-        // console.log(item.data.itemName);
-        // if (item.data.itemName.includes(searchName)) {
-        //   setSearchedItem((prevState) => {
-        //     return [...prevState, { itemName: item.data.itemName }];
-        //   });
-        // }
-        // item.data.itemName.includes(searchName);
-      });
-      setSearchedItem((prevState) => {
-        return [...prevState, result];
-      });
-      console.log(result);
-      console.log(searchedItem);
-      */
 
       items.map((item) => {
-        // let value;
-        // console.log(item.data.itemName);
-        // console.log(item.data.itemName.toLowerCase().includes(searchName.toLowerCase()));
-
         if (item.data.itemName.toLowerCase().includes(searchName.toLowerCase())) {
-          // console.log("value", item.data.itemName);
-
           setSearchedItem((prevSearched) => {
-            // console.log("prevSearched", prevSearched);
-            // console.log(searchedItem);
             return [...prevSearched, item];
           });
 
@@ -109,29 +77,11 @@ const Header = () => {
           */
         }
       });
-
-      // setSearchedItem([]);
-
-      //   items.map((item) => {
-      //     console.log(item.data.itemName);
-      //     console.log(item.data.itemName.toLowerCase().includes(searchName.toLowerCase()));
-      //     if (item.data.itemName.includes(searchName)) {
-      //       setSearchedItem((prevState) => {
-      //         return [...prevState, { itemName: item.data.itemName }];
-      //       });
-      //     }
-      //   });
-      // }
-      // console.log("searchedItem", searchedItem);
-      // setSearchName("");
-      // setSearchCategory("");
-      // setSearchLocation("");
     }
 
     setSearchName("");
     setSearchCategory("");
     setSearchLocation("");
-    // return <Shop searchedItem={searchedItem} />;
   };
 
   const onKeyPress = (event) => {
@@ -140,12 +90,27 @@ const Header = () => {
     }
   };
 
-  const logoutEvent = () => {
-    auth.signOut();
-    // history.push("/");
-    setLogOutActive(true);
+  const onClickAvatar = (e) => {
+    e.preventDefault();
+    if (expandAvatar) {
+      setExpandAvatar(false);
+    } else {
+      setExpandAvatar(true);
+    }
+  };
 
-    // <Link to="/" />;
+  const myAccountEvent = () => {
+    console.log("click");
+  };
+
+  const myItemsEvent = () => {
+    console.log("click");
+  };
+  const logoutEvent = () => {
+    console.log("click");
+
+    auth.signOut();
+    setLogOutActive(true);
   };
 
   return logOutActive ? (
@@ -157,50 +122,29 @@ const Header = () => {
           <Link to="/">
             <img className="header__main__logo" src="../../images/logo.png" alt="logo" />
           </Link>
-          <div className="header__main__left__inputs">
-            <input
-              type="text"
-              value={searchName}
-              onChange={(e) => setSearchName(e.target.value)}
-              placeholder="Search item or location..."
-              onKeyPress={onKeyPress}
-            />
-            <div className="ExpandMoreIcon">
-              <input
-                type="text"
-                value={searchCategory}
-                onChange={(e) => setSearchCategory(e.target.value)}
-                placeholder="All category"
-                onKeyPress={onKeyPress}
-              />
-              <ExpandMoreIcon />
-            </div>
-            <div className="locationBox">
-              <LocationOnIcon />
-              <input
-                type="text"
-                value={searchLocation}
-                onChange={(e) => setSearchLocation(e.target.value)}
-                placeholder="Calgary, Alberta"
-                onKeyPress={onKeyPress}
-              />
-            </div>
-            <div className="searchBox">
-              <SearchIcon onClick={itemSearch} />
-              {searchBtnClicked && <Shop searchedItem={searchedItem} />}
-              {/* {searchedItem && <Shop searchedItem={searchedItem} />} */}
-            </div>
-          </div>
         </div>
         <div className="header__main__right">
           <FavoriteBorderIcon />
-          <NotificationsNoneIcon />
           <ChatBubbleOutlineIcon />
-          {/* <a href="/"> */}
-          <Avatar onClick={logoutEvent} className="header__main__right__avatar">
+          <Avatar onClick={onClickAvatar} className="header__main__right__avatar">
             J
           </Avatar>
-          {/* </a> */}
+          {expandAvatar && (
+            <div className="expand_Navigation">
+              <ul>
+                <Link style={{ textDecoration: "none", color: "black" }} to="/myaccount">
+                  My Account
+                </Link>
+              </ul>
+              <ul>
+                {" "}
+                <Link style={{ textDecoration: "none", color: "black" }} to="/manageItem">
+                  My Items
+                </Link>
+              </ul>
+              <ul onClick={logoutEvent}>Logout</ul>
+            </div>
+          )}
         </div>
       </div>
     </>

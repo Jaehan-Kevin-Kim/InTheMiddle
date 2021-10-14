@@ -1,11 +1,63 @@
 import { Avatar } from "@material-ui/core";
 import React, { useState } from "react";
+import styled from "styled-components";
 import PostInputOption from "./PostInputOption";
 import ThumbUpAltOutlinedIcon from "@material-ui/icons/ThumbUpAltOutlined";
 import ChatOutlinedIcon from "@material-ui/icons/ChatOutlined";
 import "./Post.css";
 import Comments from "./Comments";
 // import { selectUser } from './features/userSlice';
+
+const PostContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 1em;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  width: 80%;
+  margin: 1em auto;
+  border: 1px solid lightgrey;
+  max-width: 1150px;
+`;
+
+const PostTop = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const PostTopInfo = styled.div`
+  margin-left: 10px;
+`;
+
+const PostTopInfoName = styled.div`
+  font-weight: 700;
+`;
+
+const PostTopInfoJob = styled.div`
+  font-size: 12px;
+  color: gray;
+`;
+
+const PostLine = styled.div`
+  margin: 1em 0;
+  border-bottom: 1px solid lightgrey;
+`;
+
+const PostBottom = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  & > button {
+    background: none;
+    border: none;
+  }
+`;
+const CommentsStyle = styled.div`
+  margin-top: 1.5em;
+  border-top: 1px dashed lightgray;
+`;
 
 const Post = ({ description, message, name, user, postId }) => {
   const [commentActive, setCommentActive] = useState(false);
@@ -22,30 +74,30 @@ const Post = ({ description, message, name, user, postId }) => {
   };
   return (
     <>
-      <div className="post__container">
-        <div className="post__top">
+      <PostContainer>
+        <PostTop>
           <Avatar> {name.split("")[0]} </Avatar>
-          <div className="post__top__info">
-            <div className="post__top__info__name">{name}</div>
-            <div className="post__top__info__job">{description}</div>
-          </div>
-        </div>
-        <div className="post__line"></div>
-        <div className="post__main">
+          <PostTopInfo>
+            <PostTopInfoName>{name}</PostTopInfoName>
+            <PostTopInfoJob>{description}</PostTopInfoJob>
+          </PostTopInfo>
+        </PostTop>
+        <PostLine></PostLine>
+        <div>
           <p>{message}</p>
         </div>
-        <div className="post__bottom">
+        <PostBottom>
           <PostInputOption Icon={ThumbUpAltOutlinedIcon} name="Like" color="gray" />
           <button onClick={commentActivator}>
             <PostInputOption Icon={ChatOutlinedIcon} name="Comment" color="gray" />
           </button>
-        </div>
+        </PostBottom>
         {commentActive && (
-          <div className="comments">
+          <CommentsStyle>
             <Comments user={user} postId={postId} />
-          </div>
+          </CommentsStyle>
         )}
-      </div>
+      </PostContainer>
     </>
   );
 };

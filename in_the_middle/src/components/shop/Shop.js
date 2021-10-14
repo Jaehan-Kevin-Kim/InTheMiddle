@@ -7,8 +7,106 @@ import { db } from "../../firebase";
 import ShopDetail from "../shopDetail/ShopDetail";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-
 import itemsReducer, { ITEM } from "../../reducers/itemsReducer";
+import styled from "styled-components";
+
+const ShopContainer = styled.div`
+  background: rgba(255, 255, 251, 0.76);
+  margin: 0;
+`;
+
+const ShopMain = styled.div`
+  margin: 2em auto;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const ShopMainTop = styled.div`
+  margin: 2em auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`;
+
+const ShopSearchInput = styled.input`
+  margin: 0;
+  width: 250px;
+  height: 2.5rem;
+  border: 1px solid lightgrey;
+  display: flex;
+  align-items: center;
+`;
+
+const ShopMainTopBtn = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const ShopTopBtn = styled.button`
+  height: 2.5rem;
+  margin-left: 1rem;
+  background: lightgrey;
+  padding: 10px;
+  cursor: pointer;
+  border: 1px solid lightgrey;
+  &:hover {
+    border: 1px solid #f2db66;
+    background: #f2db66;
+  }
+`;
+
+const ShopMainItems = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  grid-gap: 25px;
+  position: relative;
+  margin: 3em auto;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ShopItemStyle = styled.div`
+  width: 100%;
+  padding: 5%;
+  margin: 0 auto;
+  cursor: pointer;
+  border: 1px solid rgba(211, 211, 211, 0.568);
+  background-color: #ffffff;
+  border-radius: 5px;
+  &:hover {
+    opacity: 0.6;
+  }
+`;
+
+const ShopItemImg = styled.img`
+  object-fit: cover;
+  width: 99%;
+  height: 200px;
+`;
+
+const ShopItemName = styled.p`
+  text-align: left;
+  text-decoration: none;
+  color: black;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 1rem;
+`;
+
+const ShopItemCost = styled.p`
+  text-align: left;
+  text-decoration: none;
+  color: black;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 1rem;
+`;
 
 const Shop = ({ shopDetail, searchBtnClicked, itemViews, searchedItem }) => {
   const [img, setImg] = useState("");
@@ -21,22 +119,11 @@ const Shop = ({ shopDetail, searchBtnClicked, itemViews, searchedItem }) => {
   const [items, setItems] = useState([]);
   const [toShopDetail, setToShopDetail] = useState(shopDetail);
   const [selectedItem, setSelectedItem] = useState([]);
-  // const [selectedItemSaved, setSelectedItemSaved] = useState();
-  // const [test, setTest] = useState("");
   const [searchedItemActive, setSearchedItemActive] = useState(false);
-  // const [asdfg, setAsdfg] = useState(false);
-  // const [sample, setSample] = useState([
-  //   { id: 1, password: 11 },
-  //   { id: 2, password: 22 },
-  // ]);
   const history = useHistory();
 
   const itemsFromRedux = useSelector((state) => state.itemsReducer);
   console.log("searchedItem", searchedItem);
-
-  // const selectItem = (items) => {
-  //   setSelectedItem(items);
-  // };
 
   const searchedItemFromHeader = useSelector((state) => state);
 
@@ -52,7 +139,7 @@ const Shop = ({ shopDetail, searchBtnClicked, itemViews, searchedItem }) => {
             snapshot.docs.map((doc) => ({
               id: doc.id,
               data: doc.data(),
-            }))
+            })),
           );
         });
     } else {
@@ -62,106 +149,22 @@ const Shop = ({ shopDetail, searchBtnClicked, itemViews, searchedItem }) => {
         .onSnapshot((snapshot) => {
           console.log("snapshot", snapshot);
           setItems(
-            searchedItem.map(
-              (v) => {
-                snapshot.docs.filter((doc) => v.id === doc.id);
-              }
-              // result = snapshot.docs.filter((doc) => v.id === doc.id);
-              // const some = snapshot.docs.some((doc) => v.id === doc.id);
-              // console.log("some", some);
-              // if (some) {
-              //   console.log("some is working");
-              //   console.log(v);
-              //   setSelectedItemSaved(v);
-              //   console.log("selectedItemSaved", selectedItemSaved);
-              // setItems((prev) => [...prev, { id: v.id, data: v.data }]);
-              // setSelectedItemSaved({ id: v.id });
-            )
+            searchedItem.map((v) => {
+              snapshot.docs.filter((doc) => v.id === doc.id);
+            }),
           );
         });
-      // console.log("snapshot.docs", snapshot.docs.id);
       console.log("items", items);
-      // });
       console.log("result", result);
 
-      result.map(
-        (v) => console.log("v", v)
-
-        // id: v.id,
-        // data: v.data(),
-      );
+      result.map((v) => console.log("v", v));
       console.log("items", items);
     }
-
-    // else {
-    //   setSearchedItemActive((prev) => {
-    //     return !prev;
-    //   });
-
-    //   setSample((prevState) => {
-    //     return [...prevState, { id: 3, password: 33 }];
-    //   });
-    //   console.log("sample in useEffect", sample);
-
-    //   console.log("searchedItem 있음");
-    //   console.log("items", items);
-    //   // setSelectedItem(searchedItem);
-    //   console.log("searchedItem in Shop in else", searchedItem);
-    //   console.log("searchedItemActive:", searchedItemActive);
-    // searchedItemActiveFunction();
-
-    // console.log("itemsFromRedux.data", itemsFromRedux.data);
   }, []);
-
-  /*
-  const searchedItemActiveFunction = useCallback(
-    () => {
-      setSearchedItemActive((prev) => {
-        return !prev;
-      });
-      setTest("testest");
-      console.log("itemsFromRedux", itemsFromRedux);
-      console.log("searchedItem 있음");
-      console.log("items", items);
-      // setSelectedItem(searchedItem);
-      console.log("searchedItem in Shop in else", searchedItem);
-      console.log("searchedItemActive:", searchedItemActive);
-    },
-    []
-    // }, []);
-  );
-  */
-  // useEffect(() => {
-  //   if (searchedItem) {
-  //     setSearchedItemActive((prev) => !prev);
-  //     console.log("itemsFromRedux", itemsFromRedux);
-  //     console.log("searchedItem 있음");
-  //     console.log("items", items);
-  //     setSelectedItem(searchedItem);
-  //     console.log("searchedItem in Shop in else", searchedItem);
-  //     console.log("rerender");
-  //     console.log("searchedItemActive:", searchedItemActive);
-  //   }
-  // }, [searchedItem]);
-
-  /*
-  useEffect(() => {
-    return dispatch(
-      {
-        // itemsReducer({
-        type: ITEM,
-        payload: {
-          items,
-        },
-      }
-      // })
-    );
-  }, [items]);
-  */
 
   const searchingFunction = (e) => {
     const filterItem = items.filter((item) =>
-      item.data.itemName.toLowerCase().includes(e.target.value.toLowerCase())
+      item.data.itemName.toLowerCase().includes(e.target.value.toLowerCase()),
     );
     console.log("filterItem", filterItem);
     setSelectedItem(filterItem);
@@ -170,6 +173,7 @@ const Shop = ({ shopDetail, searchBtnClicked, itemViews, searchedItem }) => {
 
   console.log(items);
   console.log("searchedItemBeforeReturn", searchedItem);
+
   return (
     <>
       {toShopDetail ? (
@@ -187,28 +191,39 @@ const Shop = ({ shopDetail, searchBtnClicked, itemViews, searchedItem }) => {
           />
         </>
       ) : (
-        <div className="container">
+        <ShopContainer>
           <Header />
-          <div>
-            <input type="text" onChange={searchingFunction} placeholder="Search by Item Name" />
-          </div>
-          <div className="shop__main">
-            <div className="shop__main__addAction">
-              <Link to="/manageItem">
-                <button className="btn_post">Manage Item</button>
-              </Link>
-              <Link to="/uploadItem">
-                <button className="btn_post">Post Ad</button>
-              </Link>
-            </div>
-            {/* <div className='shop__link'> */}
-            <div className="items">
+          <ShopMain>
+            {/* <div className="shop__main__addAction"> */}
+            <ShopMainTop>
+              <ShopSearchInput
+                type="text"
+                onChange={searchingFunction}
+                placeholder="Search by Item Name"
+              />
+              {/* <ShopSearchInput> */}
+
+              <ShopMainTopBtn>
+                {/* <ShopMainTopBtn> */}
+                <Link to="/manageItem">
+                  <ShopTopBtn className="btn_post">My Items</ShopTopBtn>
+                  {/* <ShopTopBtn>*/}
+                </Link>
+                <Link to="/uploadItem">
+                  <ShopTopBtn className="btn_post">Post Ad</ShopTopBtn>
+                  {/* <ShopTopBtn> */}
+                </Link>
+              </ShopMainTopBtn>
+            </ShopMainTop>
+
+            {/* <div className="items"> */}
+            <ShopMainItems>
               {searchedItemActive
                 ? selectedItem.map(
                     ({ id, data: { itemName, itemImg, itemCost, itemRegion, itemDesc } }) => (
                       <>
-                        <div
-                          className="item"
+                        {/* <ShopItem> */}
+                        <ShopItemStyle
                           onClick={(e) => {
                             console.log(toShopDetail);
                             console.log(itemName);
@@ -223,22 +238,18 @@ const Shop = ({ shopDetail, searchBtnClicked, itemViews, searchedItem }) => {
                             setDescription(itemDesc);
                             setLocation(itemRegion);
                           }}>
-                          <img src={itemImg} alt="" />
-                          <p className="itemName">{itemName}</p>
-                          <p>${itemCost}</p>
-                          {/* <p>{itemViews}</p> */}
-                        </div>
+                          <ShopItemImg src={itemImg} alt="" />
+                          <ShopItemName className="itemName">{itemName}</ShopItemName>
+                          <ShopItemCost>${itemCost}</ShopItemCost>
+                        </ShopItemStyle>
                       </>
-                    )
+                    ),
                   )
-                : // }))}
-                  // {
-                  items.map(
+                : items.map(
                     ({ id, data: { itemName, itemImg, itemCost, itemRegion, itemDesc } }) => (
                       <>
-                        {/* <Link to="/shopDetail"> */}
-                        <div
-                          className="item"
+                        {/* <ShopItem> */}
+                        <ShopItemStyle
                           onClick={(e) => {
                             console.log(toShopDetail);
                             console.log(itemName);
@@ -253,18 +264,16 @@ const Shop = ({ shopDetail, searchBtnClicked, itemViews, searchedItem }) => {
                             setDescription(itemDesc);
                             setLocation(itemRegion);
                           }}>
-                          <img src={itemImg} alt="" />
-                          <p className="itemName">{itemName}</p>
-                          <p>${itemCost}</p>
-                        </div>
-                        {/* </Link> */}
+                          <ShopItemImg src={itemImg} alt="" />
+                          <ShopItemName>{itemName}</ShopItemName>
+                          <ShopItemCost>${itemCost}</ShopItemCost>
+                        </ShopItemStyle>
                       </>
-                    )
+                    ),
                   )}
-            </div>
-          </div>
-        </div>
-        // </div>
+            </ShopMainItems>
+          </ShopMain>
+        </ShopContainer>
       )}
     </>
   );
