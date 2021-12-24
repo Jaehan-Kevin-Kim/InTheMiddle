@@ -1,0 +1,7 @@
+1. 로그인한 유저정보를 가지고 갈수 있게 수정하기 => 기본인 App에서 해당 내용을 설정 해 주어야 함.
+ㄴ> userObj라는 object에 displayname, userId 등의 내용 가지고 전달.
+2. Login option error 표시하게 하기
+3. Upload Item: 사진 추가 안하고 submit 버튼 클릭시 오류 발생
+4. upload 버튼 두번 눌렀을때 오류 발생 => upload버튼 빼기
+5. manage Item에서 같은 사진 올렸을때 하나를 지우면 다른 사진들도 지워 짐.
+
