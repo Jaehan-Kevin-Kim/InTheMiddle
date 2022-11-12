@@ -113,7 +113,9 @@ const UploadItem = ({ userId }) => {
       "state_changed",
       (snapshot) => {
         //progress fuction ...
-        const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
+        );
         setProgress(progress);
       },
       (error) => {
@@ -196,13 +198,18 @@ const UploadItem = ({ userId }) => {
             <ImageUpload onClick={imageUploadFunction} />
           </div> */}
           <ImageUpload>
-            <h3 style={{alignSelf: "flex-start", marginBottom:'10px'}}>Image Upload</h3>
+            <h3 style={{ alignSelf: "flex-start", marginBottom: "10px" }}>
+              Image Upload
+            </h3>
             <div className="buttons">
               <input type="file" onChange={handleChange} />
               <button onClick={handleUpload}>Upload</button>
-           </div>
-          <Progress style={{marginTop: '-30px', marginBottom: '1rem'}} value={progress} max="100" />
-
+            </div>
+            <Progress
+              style={{ marginTop: "-30px", marginBottom: "1rem" }}
+              value={progress}
+              max="100"
+            />
           </ImageUpload>
 
           <div className="upload_description">
